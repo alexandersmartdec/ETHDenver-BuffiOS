@@ -376,7 +376,7 @@ class WalletViewController: BasicViewController, ModalViewDelegate {
         self.tabBarController?.present(sendMoneyVC, animated: true, completion: nil)
     }
     
-    func showAlert(error: String?) {
+    func showAlert(error: String? = nil) {
         DispatchQueue.main.async { [unowned self] in
             self.alerts.showErrorAlert(for: self, error: error ?? "Unknown error", completion: nil)
         }
@@ -384,6 +384,11 @@ class WalletViewController: BasicViewController, ModalViewDelegate {
     
     func showWithdraw() {
         let alert = UIAlertController(title: "Withdraw to \(CurrentNetwork.currentNetwork.name)", message: nil, preferredStyle: UIAlertController.Style.alert)
+        
+        alert.addTextField { (textField) in
+            textField.placeholder = "Enter amount"
+            textField.keyboardType = .decimalPad
+        }
         
         let enterAction = UIAlertAction(title: "Apply", style: .default) { [unowned self] (_) in
             guard let wallet = CurrentWallet.currentWallet else {
@@ -395,6 +400,183 @@ class WalletViewController: BasicViewController, ModalViewDelegate {
                     let password = try wallet.getPassword()
                     let maxIteractions = BigUInt(1)
                     let tx = try wallet.prepareWriteContractTx(contractABI: ignisABI, contractAddress: ignisAddress, contractMethod: "withdrawUserBalance", value: "0", gasLimit: .automatic, gasPrice: .automatic, parameters: [maxIteractions] as [AnyObject], extraData: Data())
+                    let result = try wallet.sendTx(transaction: tx, options: nil, password: password)
+                } catch let error {
+                    self.showAlert(error: error.localizedDescription)
+                }
+            }
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
+            
+        }
+        
+        alert.addAction(enterAction)
+        alert.addAction(cancelAction)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func showBuy(token: ERC20Token) {
+        let alert = UIAlertController(title: "Buy \(token.name)", message: nil, preferredStyle: UIAlertController.Style.alert)
+        
+        alert.addTextField { (textField) in
+            textField.placeholder = "Enter amount in ETH"
+            textField.keyboardType = .decimalPad
+        }
+        
+        let enterAction = UIAlertAction(title: "Apply", style: .default) { [unowned self] (_) in
+            guard let wallet = CurrentWallet.currentWallet else {
+                self.showAlert(error: "Cant get wallet")
+                return
+            }
+            guard let amount = alert.textFields![0].text else {
+                self.showAlert(error: "Cant get amount")
+                return
+            }
+            guard Float(amount)! > 0 else {
+                self.showAlert(error: "Can't be zero")
+                return
+            }
+            DispatchQueue.global().async {
+                do {
+                    let timestamp = BigUInt(Date().timestamp+300)
+                    let minTokens = BigUInt(1)
+                    let web3 = CurrentNetwork().isXDai() ? Web3.InfuraMainnetWeb3() : nil
+                    
+                    let password = try wallet.getPassword()
+                    let tx = try wallet.prepareWriteContractTx(web3instance: web3, contractABI: ABIs.uniswap, contractAddress: Addresses.uniswap, contractMethod: "ethToTokenSwapInput", value: amount, gasLimit: .automatic, gasPrice: .automatic, parameters: [minTokens, timestamp] as [AnyObject], extraData: Data())
+                    let result = try wallet.sendTx(transaction: tx, options: nil, password: password)
+                } catch let error {
+                    self.showAlert(error: error.localizedDescription)
+                }
+            }
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
+            
+        }
+        
+        alert.addAction(enterAction)
+        alert.addAction(cancelAction)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func showSell(token: ERC20Token) {
+        let alert = UIAlertController(title: "Sell \(token.name)", message: nil, preferredStyle: UIAlertController.Style.alert)
+        
+        alert.addTextField { (textField) in
+            textField.placeholder = "Enter amount in \(token.symbol.uppercased())"
+            textField.keyboardType = .decimalPad
+        }
+        
+        let enterAction = UIAlertAction(title: "Apply", style: .default) { [unowned self] (_) in
+            guard let wallet = CurrentWallet.currentWallet else {
+                self.showAlert(error: "Cant get wallet")
+                return
+            }
+            guard let amount = alert.textFields![0].text else {
+                self.showAlert(error: "Cant get amount")
+                return
+            }
+            guard Float(amount)! > 0 else {
+                self.showAlert(error: "Can't be zero")
+                return
+            }
+            DispatchQueue.global().async {
+                do {
+                    let timestamp = BigUInt(Date().timestamp+300)
+                    let minEth = BigUInt(1)
+                    let tokens = Web3.Utils.parseToBigUInt(amount, units: .eth)
+                    let web3 = CurrentNetwork().isXDai() ? Web3.InfuraMainnetWeb3() : nil
+                    
+                    let password = try wallet.getPassword()
+                    let tx = try wallet.prepareWriteContractTx(web3instance: web3, contractABI: ABIs.uniswap, contractAddress: Addresses.uniswap, contractMethod: "tokenToEthSwapInput", value: "0.0", gasLimit: .automatic, gasPrice: .automatic, parameters: [tokens, minEth, timestamp] as [AnyObject], extraData: Data())
+                    let result = try wallet.sendTx(transaction: tx, options: nil, password: password)
+                } catch let error {
+                    self.showAlert(error: error.localizedDescription)
+                }
+            }
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
+            
+        }
+        
+        alert.addAction(enterAction)
+        alert.addAction(cancelAction)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func showConvertToXDai(token: ERC20Token) {
+        let alert = UIAlertController(title: "Convert to xDai", message: nil, preferredStyle: UIAlertController.Style.alert)
+        
+        alert.addTextField { (textField) in
+            textField.placeholder = "Enter amount in \(token.symbol.uppercased())"
+            textField.keyboardType = .decimalPad
+        }
+        
+        let enterAction = UIAlertAction(title: "Apply", style: .default) { [unowned self] (_) in
+            guard let wallet = CurrentWallet.currentWallet else {
+                self.showAlert(error: "Cant get wallet")
+                return
+            }
+            guard let amount = alert.textFields![0].text else {
+                self.showAlert(error: "Cant get amount")
+                return
+            }
+            guard Float(amount)! > 0 else {
+                self.showAlert(error: "Can't be zero")
+                return
+            }
+            DispatchQueue.global().async {
+                do {
+                    let xdaiContract = EthereumAddress(Addresses.daiToXDai)!
+                    let tokens = Web3.Utils.parseToBigUInt(amount, units: .eth)
+                    let web3 = CurrentNetwork().isXDai() ? Web3.InfuraMainnetWeb3() : nil
+                    
+                    let password = try wallet.getPassword()
+                    let tx = try wallet.prepareWriteContractTx(web3instance: web3, contractABI: ABIs.dai, contractAddress: Addresses.dai, contractMethod: "transfer", value: "0.0", gasLimit: .automatic, gasPrice: .automatic, parameters: [xdaiContract, tokens] as [AnyObject], extraData: Data())
+                    let result = try wallet.sendTx(transaction: tx, options: nil, password: password)
+                } catch let error {
+                    self.showAlert(error: error.localizedDescription)
+                }
+            }
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
+            
+        }
+        
+        alert.addAction(enterAction)
+        alert.addAction(cancelAction)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func showConvertToDai(token: ERC20Token) {
+        let alert = UIAlertController(title: "Convert to Dai", message: nil, preferredStyle: UIAlertController.Style.alert)
+        
+        alert.addTextField { (textField) in
+            textField.placeholder = "Enter amount in \(token.symbol.uppercased())"
+            textField.keyboardType = .decimalPad
+        }
+        
+        let enterAction = UIAlertAction(title: "Apply", style: .default) { [unowned self] (_) in
+            guard let wallet = CurrentWallet.currentWallet else {
+                self.showAlert(error: "Cant get wallet")
+                return
+            }
+            guard let amount = alert.textFields![0].text else {
+                self.showAlert(error: "Cant get amount")
+                return
+            }
+            guard Float(amount)! > 0 else {
+                self.showAlert(error: "Can't be zero")
+                return
+            }
+            DispatchQueue.global().async {
+                do {
+                    let password = try wallet.getPassword()
+                    let tx = try wallet.prepareSendXDaiTx(toAddress: Addresses.xDaiToDai, value: amount)
                     let result = try wallet.sendTx(transaction: tx, options: nil, password: password)
                 } catch let error {
                     self.showAlert(error: error.localizedDescription)
@@ -472,17 +654,50 @@ class WalletViewController: BasicViewController, ModalViewDelegate {
         self.present(alert, animated: true, completion: nil)
     }
     
-    func showAlert(token: ERC20Token) {
+    func showCardAlert(token: ERC20Token) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Send", style: .default, handler: { [unowned self] (action) in
             self.showSend(token: token)
         }))
-        alert.addAction(UIAlertAction(title: "Deposit", style: .default, handler: { [unowned self] (action) in
-            self.showDeposit()
+        if token.isFranklin() {
+            alert.addAction(UIAlertAction(title: "Deposit", style: .default, handler: { [unowned self] (action) in
+                self.showDeposit()
+            }))
+            alert.addAction(UIAlertAction(title: "Withdraw", style: .default, handler: { [unowned self] (action) in
+                self.showWithdraw()
+            }))
+        }
+        if token.isXDai() {
+            alert.addAction(UIAlertAction(title: "Dai to xDai", style: .default, handler: { [unowned self] (action) in
+                self.showConvertToXDai(token: Dai())
+            }))
+            alert.addAction(UIAlertAction(title: "xDai to Dai", style: .default, handler: { [unowned self] (action) in
+                self.showConvertToDai(token: token)
+            }))
+        }
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(alert, animated: true)
+    }
+    
+    func showTokenAlert(token: ERC20Token) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Send", style: .default, handler: { [unowned self] (action) in
+            self.showSend(token: token)
         }))
-        alert.addAction(UIAlertAction(title: "Withdraw", style: .default, handler: { [unowned self] (action) in
-            self.showWithdraw()
-        }))
+        if !token.isEther() {
+            alert.addAction(UIAlertAction(title: "Buy by Ether", style: .default, handler: { [unowned self] (action) in
+                self.showBuy(token: token)
+            }))
+//            alert.addAction(UIAlertAction(title: "Sell for Ether", style: .default, handler: { [unowned self] (action) in
+//                self.showSell(token: token)
+//            }))
+        }
+        if token.isDai() {
+            alert.addAction(UIAlertAction(title: "Convert to xDai", style: .default, handler: { [unowned self] (action) in
+                self.showConvertToXDai(token: token)
+            }))
+        }
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         self.present(alert, animated: true)
     }
@@ -602,10 +817,11 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource, Tabl
         let tableToken = isCard ?
             self.tokensArray[0] :
             self.tokensArray[indexPathTapped.row+1]
+        
         if isCard {
-            self.showAlert(token: tableToken.token)
+            self.showCardAlert(token: tableToken.token)
         } else {
-            self.showSend(token: tableToken.token)
+            self.showTokenAlert(token: tableToken.token)
         }
     }
 

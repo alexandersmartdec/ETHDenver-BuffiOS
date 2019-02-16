@@ -15,6 +15,7 @@
 		3A693A452217A45800F385C2 /* XDai.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A693A442217A45800F385C2 /* XDai.swift */; };
 		3A693A482217A8AD00F385C2 /* XDaiURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A693A472217A8AD00F385C2 /* XDaiURLs.swift */; };
 		3A693A4A2217AAC500F385C2 /* BalanceJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A693A492217AAC500F385C2 /* BalanceJSON.swift */; };
+		3A693A4C2218746200F385C2 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A693A4B2218746200F385C2 /* DateExtension.swift */; };
 		3A8096CD2212D1CC00DAB8DC /* Dai.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8096CC2212D1CC00DAB8DC /* Dai.swift */; };
 		3A8096D02212E9FC00DAB8DC /* TokenCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8096CE2212E9FC00DAB8DC /* TokenCell.swift */; };
 		3A8096D12212E9FC00DAB8DC /* TokenCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A8096CF2212E9FC00DAB8DC /* TokenCell.xib */; };
@@ -266,6 +267,7 @@
 		3A693A442217A45800F385C2 /* XDai.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XDai.swift; sourceTree = "<group>"; };
 		3A693A472217A8AD00F385C2 /* XDaiURLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XDaiURLs.swift; sourceTree = "<group>"; };
 		3A693A492217AAC500F385C2 /* BalanceJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceJSON.swift; sourceTree = "<group>"; };
+		3A693A4B2218746200F385C2 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		3A8096CC2212D1CC00DAB8DC /* Dai.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dai.swift; sourceTree = "<group>"; };
 		3A8096CE2212E9FC00DAB8DC /* TokenCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenCell.swift; sourceTree = "<group>"; };
 		3A8096CF2212E9FC00DAB8DC /* TokenCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TokenCell.xib; sourceTree = "<group>"; };
@@ -1396,6 +1398,7 @@
 				E2215AC62201B0C400FC79AB /* FontExtension.swift */,
 				E2A8DBB821F6A96F0031AC58 /* ViewExtension.swift */,
 				E2215AC82201B0ED00FC79AB /* LabelExtension.swift */,
+				3A693A4B2218746200F385C2 /* DateExtension.swift */,
 				E2C1107B21E507330012A978 /* SearchControllerExtension.swift */,
 				E2C1107C21E507330012A978 /* StringExtension.swift */,
 				E2D451DC21EE980B00218872 /* DoubleExtension.swift */,
@@ -2380,6 +2383,7 @@
 				E2C1106B21E507260012A978 /* NavigationController.swift in Sources */,
 				E2C1109621E557FE0012A978 /* EIP681Model.swift in Sources */,
 				E2C1106A21E507260012A978 /* Alerts.swift in Sources */,
+				3A693A4C2218746200F385C2 /* DateExtension.swift in Sources */,
 				E27BF77A21D1447A00951061 /* PlasmaConstants.swift in Sources */,
 				9197F2F22143B9D600C358AA /* CardCell.swift in Sources */,
 				3A5D7AAB221632410032B20C /* IgnisConstants.swift in Sources */,

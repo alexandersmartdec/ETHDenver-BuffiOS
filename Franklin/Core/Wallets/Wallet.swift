@@ -38,6 +38,11 @@ protocol IWalletTokens {
     func getSelectedToken(network: Web3Network) throws -> ERC20Token
 }
 
+protocol IWalletBlock {
+    func getBlockNumber(_ web3instance: web3?) throws -> BigUInt
+    func getBlock(_ web3instance: web3?) throws -> String
+}
+
 protocol IWalletTransactions {
     func loadTransactions(txType: TransactionType?,
                           network: Web3Network) throws -> [ETHTransaction]
@@ -97,6 +102,11 @@ protocol IWalletXDAI {
     func getXDAIBalance() throws -> String
     func getXDAITransactions() throws -> [ETHTransaction]
     func getXDAITokens() throws -> [ERC20Token]
+    func prepareSendXDaiTx(web3instance: web3?,
+                           toAddress: String,
+                           value: String,
+                           gasLimit: TransactionOptions.GasLimitPolicy,
+                           gasPrice: TransactionOptions.GasPricePolicy) throws -> WriteTransaction
 }
 
 public class Wallet: IWallet {
@@ -1448,6 +1458,61 @@ extension Wallet: IWalletXDAI {
             }).resume()
         }
         return returnPromise
+    }
+    
+    public func prepareSendXDaiTx(web3instance: web3? = nil,
+                                  toAddress: String,
+                                  value: String = "0.0",
+                                  gasLimit: TransactionOptions.GasLimitPolicy = .automatic,
+                                  gasPrice: TransactionOptions.GasPricePolicy = .automatic) throws -> WriteTransaction {
+        guard let web3 = web3instance ?? self.web3Instance else {
+            throw Web3Error.walletError
+        }
+        web3.addKeystoreManager(self.keystoreManager)
+        guard let ethAddress = EthereumAddress(toAddress),
+            let contract = web3.contract(ABIs.xdai, at: ethAddress, abiVersion: 2) else {
+                throw Web3Error.dataError
+        }
+        let amount = Web3.Utils.parseToBigUInt(value, units: .eth)
+        var options = self.defaultOptions()
+        options.value = amount
+        options.gasPrice = gasPrice
+        options.gasLimit = gasLimit
+        guard let tx = contract.write("fallback",
+                                      parameters: [AnyObject](),
+                                      extraData: Data(),
+                                      transactionOptions: options) else {
+                                        throw Web3Error.transactionSerializationError
+        }
+        return tx
+    }
+}
+
+extension Wallet: IWalletBlock {
+    public func getBlockNumber(_ web3instance: web3? = nil) throws -> BigUInt {
+        guard let web3 = web3instance ?? self.web3Instance else {
+            throw Web3Error.walletError
+        }
+        web3.addKeystoreManager(self.keystoreManager)
+        do {
+            let blockNumber = try web3.eth.getBlockNumber()
+            return blockNumber
+        } catch let error {
+            throw error
+        }
+    }
+    
+    public func getBlock(_ web3instance: web3? = nil) throws -> String {
+        guard let web3 = web3instance ?? self.web3Instance else {
+            throw Web3Error.walletError
+        }
+        web3.addKeystoreManager(self.keystoreManager)
+        do {
+            let block = try web3.eth.getBlock()
+            return block
+        } catch let error {
+            throw error
+        }
     }
 }
 
