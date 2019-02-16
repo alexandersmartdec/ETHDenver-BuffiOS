@@ -47,18 +47,21 @@ protocol IWalletTransactions {
 
 protocol IWalletActions {
     func getFranklinBalance() throws -> String
-    func getERC20balance(for token: ERC20Token) throws -> String
-    func getETHbalance() throws -> String
-    func prepareSendEthTx(toAddress: String,
+    func getERC20balance(for token: ERC20Token, web3instance: web3?) throws -> String
+    func getETHbalance(web3instance: web3?) throws -> String
+    func prepareSendEthTx(web3instance: web3?,
+                          toAddress: String,
                           value: String,
                           gasLimit: TransactionOptions.GasLimitPolicy,
                           gasPrice: TransactionOptions.GasPricePolicy) throws -> WriteTransaction
-    func prepareSendERC20Tx(token: ERC20Token,
+    func prepareSendERC20Tx(web3instance: web3?,
+                            token: ERC20Token,
                             toAddress: String,
                             tokenAmount: String,
                             gasLimit: TransactionOptions.GasLimitPolicy,
                             gasPrice: TransactionOptions.GasPricePolicy) throws -> WriteTransaction
-    func prepareWriteContractTx(contractABI: String,
+    func prepareWriteContractTx(web3instance: web3?,
+                                contractABI: String,
                                 contractAddress: String,
                                 contractMethod: String,
                                 value: String,
@@ -66,7 +69,8 @@ protocol IWalletActions {
                                 gasPrice: TransactionOptions.GasPricePolicy,
                                 parameters: [AnyObject],
                                 extraData: Data) throws -> WriteTransaction
-    func prepareReadContractTx(contractABI: String,
+    func prepareReadContractTx(web3instance: web3?,
+                               contractABI: String,
                                contractAddress: String,
                                contractMethod: String,
                                gasLimit: TransactionOptions.GasLimitPolicy,
@@ -87,6 +91,12 @@ protocol IWalletPlasma {
     func getIgnisNonce(network: Web3Network) throws -> BigUInt
     func sendPlasmaTx(nonce: BigUInt, to: EthereumAddress, value: String, network: Web3Network) throws -> Bool
     //func loadTransactions(network: Web3Network) throws -> [ETHTransaction]
+}
+
+protocol IWalletXDAI {
+    func getXDAIBalance() throws -> String
+    func getXDAITransactions() throws -> [ETHTransaction]
+    func getXDAITokens() throws -> [ERC20Token]
 }
 
 public class Wallet: IWallet {
@@ -119,10 +129,20 @@ public class Wallet: IWallet {
     }
     
     private var web3Instance: web3? {
-        let web3 = CurrentNetwork.currentWeb
-        let keystoreManager = self.keystoreManager
-        web3?.addKeystoreManager(keystoreManager)
-        return web3
+        get {
+            let web3 = CurrentNetwork.currentWeb
+            let keystoreManager = self.keystoreManager
+            web3?.addKeystoreManager(keystoreManager)
+            return web3
+        }
+        set (web3) {
+            let keystoreManager = self.keystoreManager
+            web3Instance?.addKeystoreManager(keystoreManager)
+        }
+    }
+    
+    public func changeWeb3(_ web3: web3) {
+        self.web3Instance = web3
     }
     
     public var keystoreManager: KeystoreManager? {
@@ -535,9 +555,12 @@ extension Wallet: IWalletActions {
         return balance
     }
     
-    public func getETHbalance() throws -> String {
+    public func getETHbalance(web3instance: web3? = nil) throws -> String {
+        guard let web3 = web3instance ?? self.web3Instance else {
+            throw Web3Error.walletError
+        }
+        web3.addKeystoreManager(self.keystoreManager)
         guard let walletAddress = EthereumAddress(self.address),
-            let web3 = self.web3Instance,
             let balanceResult = try? web3.eth.getBalance(address: walletAddress)
              else {
             throw Web3Error.walletError
@@ -548,12 +571,17 @@ extension Wallet: IWalletActions {
         return balanceString
     }
     
-    public func getERC20balance(for token: ERC20Token) throws -> String {
+    public func getERC20balance(for token: ERC20Token, web3instance: web3? = nil) throws -> String {
+        guard let web3 = web3instance ?? self.web3Instance else {
+            throw Web3Error.walletError
+        }
+        web3.addKeystoreManager(self.keystoreManager)
         do {
             guard let walletAddress = EthereumAddress(self.address) else {
                     throw Web3Error.walletError
             }
-            let tx = try self.prepareReadContractTx(contractABI: Web3.Utils.erc20ABI,
+            let tx = try self.prepareReadContractTx(web3instance: web3,
+                                                    contractABI: Web3.Utils.erc20ABI,
                                                     contractAddress: token.address,
                                                     contractMethod: "balanceOf",
                                                     gasLimit: .automatic,
@@ -571,12 +599,16 @@ extension Wallet: IWalletActions {
         }
     }
     
-    public func prepareSendEthTx(toAddress: String,
+    public func prepareSendEthTx(web3instance: web3? = nil,
+                                 toAddress: String,
                                  value: String = "0.0",
                                  gasLimit: TransactionOptions.GasLimitPolicy = .automatic,
                                  gasPrice: TransactionOptions.GasPricePolicy = .automatic) throws -> WriteTransaction {
+        guard let web3 = web3instance ?? self.web3Instance else {
+            throw Web3Error.walletError
+        }
+        web3.addKeystoreManager(self.keystoreManager)
         guard let ethAddress = EthereumAddress(toAddress),
-            let web3 = self.web3Instance,
             let contract = web3.contract(Web3.Utils.coldWalletABI, at: ethAddress, abiVersion: 2) else {
                 throw Web3Error.dataError
         }
@@ -594,14 +626,18 @@ extension Wallet: IWalletActions {
         return tx
     }
     
-    public func prepareSendERC20Tx(token: ERC20Token,
+    public func prepareSendERC20Tx(web3instance: web3? = nil,
+                                   token: ERC20Token,
                                    toAddress: String,
                                    tokenAmount: String = "0.0",
                                    gasLimit: TransactionOptions.GasLimitPolicy = .automatic,
                                    gasPrice: TransactionOptions.GasPricePolicy = .automatic) throws -> WriteTransaction {
+        guard let web3 = web3instance ?? self.web3Instance else {
+            throw Web3Error.walletError
+        }
+        web3.addKeystoreManager(self.keystoreManager)
         guard let ethTokenAddress = EthereumAddress(token.address),
             let ethToAddress = EthereumAddress(toAddress),
-            let web3 = self.web3Instance,
             let contract = web3.contract(Web3.Utils.erc20ABI, at: ethTokenAddress, abiVersion: 2) else {
                 throw Web3Error.dataError
         }
@@ -619,7 +655,8 @@ extension Wallet: IWalletActions {
         return tx
     }
     
-    public func prepareWriteContractTx(contractABI: String,
+    public func prepareWriteContractTx(web3instance: web3? = nil,
+                                       contractABI: String,
                                        contractAddress: String,
                                        contractMethod: String,
                                        value: String = "0.0",
@@ -627,8 +664,11 @@ extension Wallet: IWalletActions {
                                        gasPrice: TransactionOptions.GasPricePolicy = .automatic,
                                        parameters: [AnyObject] = [AnyObject](),
                                        extraData: Data = Data()) throws -> WriteTransaction {
+        guard let web3 = web3instance ?? self.web3Instance else {
+            throw Web3Error.walletError
+        }
+        web3.addKeystoreManager(self.keystoreManager)
         guard let ethContractAddress = EthereumAddress(contractAddress),
-            let web3 = self.web3Instance,
             let contract = web3.contract(contractABI, at: ethContractAddress, abiVersion: 2) else {
                 throw Web3Error.dataError
         }
@@ -646,15 +686,19 @@ extension Wallet: IWalletActions {
         return tx
     }
     
-    public func prepareReadContractTx(contractABI: String,
+    public func prepareReadContractTx(web3instance: web3? = nil,
+                                      contractABI: String,
                                       contractAddress: String,
                                       contractMethod: String,
                                       gasLimit: TransactionOptions.GasLimitPolicy = .automatic,
                                       gasPrice: TransactionOptions.GasPricePolicy = .automatic,
                                       parameters: [AnyObject] = [AnyObject](),
                                       extraData: Data = Data()) throws -> ReadTransaction {
+        guard let web3 = web3instance ?? self.web3Instance else {
+            throw Web3Error.walletError
+        }
+        web3.addKeystoreManager(self.keystoreManager)
         guard let ethContractAddress = EthereumAddress(contractAddress),
-            let web3 = self.web3Instance,
             let contract = web3.contract(contractABI, at: ethContractAddress, abiVersion: 2) else {
                 throw Web3Error.dataError
         }
@@ -822,6 +866,23 @@ extension Wallet: IWalletTransactions {
         } catch let error {
             throw error
         }
+    }
+    
+    private func buildTokenslist(from results: [[String: Any]]) throws -> [ERC20Token] {
+        var tokens = [ERC20Token]()
+        for result in results {
+            guard let balance = result["balance"] as? String,
+                let contractAddress = result["contractAddress"] as? String,
+                let decimals = result["decimals"] as? String,
+                let name = result["name"] as? String,
+                let symbol = result["symbol"] as? String else {
+                    throw Errors.NetworkErrors.wrongJSON
+            }
+            var token = ERC20Token(name: name, address: contractAddress, decimals: decimals, symbol: symbol)
+            token.balance = balance
+            tokens.append(token)
+        }
+        return tokens
     }
     
     private func buildTXlist(from results: [[String: Any]],
@@ -1221,6 +1282,173 @@ extension Wallet: IWalletPlasma {
 //        }
 //        return returnPromise
 //    }
+}
+
+extension Wallet: IWalletXDAI {
+    public func getXDAIBalance() throws -> String {
+        let balance = try self.getXDAIBalancePromise().wait()
+        let floatBalance = Float(balance)!
+        let amount = floatBalance / ("1000000000000000000" as NSString).floatValue
+        return String(amount)
+    }
+    
+    private func getXDAIBalancePromise() -> Promise<String> {
+        let returnPromise = Promise<String> { (seal) in
+            guard let url = try? XDaiURLs().balance(address: self.address) else {
+                seal.reject(Errors.NetworkErrors.wrongURL)
+                return
+            }
+//            let balanceJSON = BalanceXDAI(["params": [self.address,"latest"]])
+//            let jsonEncoder = JSONEncoder()
+//            let jsonData = try jsonEncoder.encode(balanceJSON)
+//            print(jsonData)
+//            let jsonString = String(data: jsonData, encoding: .utf8)
+//            print(jsonString)
+            guard let request = request(url: url,
+                                        data: nil,
+                                        method: .post,
+                                        contentType: .json) else {
+                                            seal.reject(PlasmaErrors.NetErrors.cantCreateRequest)
+                                            return
+            }
+            session.dataTask(with: request, completionHandler: { (data, response, error) in
+                if let error = error {
+                    seal.reject(error)
+                }
+                guard let data = data else {
+                    seal.reject(Errors.NetworkErrors.noData)
+                    return
+                }
+                do {
+                    guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
+                        seal.reject(Errors.NetworkErrors.wrongJSON)
+                        return
+                    }
+                    print(json)
+                    guard let balance = json["result"] as? String else {
+                        seal.reject(Errors.NetworkErrors.wrongJSON)
+                        return
+                    }
+                    seal.fulfill(balance)
+                } catch let err {
+                    seal.reject(err)
+                }
+            }).resume()
+        }
+        return returnPromise
+    }
+    
+    public func getXDAITransactions() throws -> [ETHTransaction] {
+        return try self.getXDAITransactionsPromise().wait()
+    }
+    
+    private func getXDAITransactionsPromise() -> Promise<[ETHTransaction]> {
+        let returnPromise = Promise<[ETHTransaction]> { (seal) in
+            guard let url = try? XDaiURLs().transactions(address: self.address) else {
+                seal.reject(Errors.NetworkErrors.wrongURL)
+                return
+            }
+            //            let balanceJSON = BalanceXDAI(["params": [self.address,"latest"]])
+            //            let jsonEncoder = JSONEncoder()
+            //            let jsonData = try jsonEncoder.encode(balanceJSON)
+            //            print(jsonData)
+            //            let jsonString = String(data: jsonData, encoding: .utf8)
+            //            print(jsonString)
+            guard let request = request(url: url,
+                                        data: nil,
+                                        method: .post,
+                                        contentType: .json) else {
+                                            seal.reject(PlasmaErrors.NetErrors.cantCreateRequest)
+                                            return
+            }
+            session.dataTask(with: request, completionHandler: { (data, response, error) in
+                if let error = error {
+                    seal.reject(error)
+                }
+                guard let data = data else {
+                    seal.reject(Errors.NetworkErrors.noData)
+                    return
+                }
+                do {
+                    guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
+                        seal.reject(Errors.NetworkErrors.wrongJSON)
+                        return
+                    }
+                    print(json)
+                    guard let results = json["result"] as? [[String: Any]] else {
+                        seal.reject(Errors.NetworkErrors.wrongJSON)
+                        return
+                    }
+                    do {
+                        let transaction = try self.buildTXlist(from: results,
+                                                               txType: .custom,
+                                                               networkId: 100)
+                        seal.fulfill(transaction)
+                    } catch let err {
+                        seal.reject(err)
+                    }
+                } catch let err {
+                    seal.reject(err)
+                }
+            }).resume()
+        }
+        return returnPromise
+    }
+    
+    public func getXDAITokens() throws -> [ERC20Token] {
+        return try self.getXDAITokensPromise().wait()
+    }
+    
+    private func getXDAITokensPromise() -> Promise<[ERC20Token]> {
+        let returnPromise = Promise<[ERC20Token]> { (seal) in
+            guard let url = try? XDaiURLs().tokens(address: self.address) else {
+                seal.reject(Errors.NetworkErrors.wrongURL)
+                return
+            }
+            //            let balanceJSON = BalanceXDAI(["params": [self.address,"latest"]])
+            //            let jsonEncoder = JSONEncoder()
+            //            let jsonData = try jsonEncoder.encode(balanceJSON)
+            //            print(jsonData)
+            //            let jsonString = String(data: jsonData, encoding: .utf8)
+            //            print(jsonString)
+            guard let request = request(url: url,
+                                        data: nil,
+                                        method: .post,
+                                        contentType: .json) else {
+                                            seal.reject(PlasmaErrors.NetErrors.cantCreateRequest)
+                                            return
+            }
+            session.dataTask(with: request, completionHandler: { (data, response, error) in
+                if let error = error {
+                    seal.reject(error)
+                }
+                guard let data = data else {
+                    seal.reject(Errors.NetworkErrors.noData)
+                    return
+                }
+                do {
+                    guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] else {
+                        seal.reject(Errors.NetworkErrors.wrongJSON)
+                        return
+                    }
+                    print(json)
+                    guard let results = json["result"] as? [[String: Any]] else {
+                        seal.reject(Errors.NetworkErrors.wrongJSON)
+                        return
+                    }
+                    do {
+                        let tokens = try self.buildTokenslist(from: results)
+                        seal.fulfill(tokens)
+                    } catch let err {
+                        seal.reject(err)
+                    }
+                } catch let err {
+                    seal.reject(err)
+                }
+            }).resume()
+        }
+        return returnPromise
+    }
 }
 
 extension Wallet: Equatable {

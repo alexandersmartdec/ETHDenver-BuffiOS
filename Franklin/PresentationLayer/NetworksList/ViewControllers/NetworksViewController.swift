@@ -48,10 +48,14 @@ class NetworksViewController: BasicViewController {
                                              .Rinkeby,
                                              .Ropsten,
                                              .Kovan]
+            var web3networks: [Web3Network]
             let basicWeb3Nets = basicNetworks.map({
-                return Web3Network(network: $0)
+                Web3Network(network: $0)
             })
-            self.networks = basicWeb3Nets
+            web3networks = basicWeb3Nets
+            let xdai = Web3Network(id: 100, name: "xDai")
+            web3networks.append(xdai)
+            self.networks = web3networks
             self.reloadDataInTable()
         }
     }

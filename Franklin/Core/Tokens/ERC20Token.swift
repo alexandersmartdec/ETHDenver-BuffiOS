@@ -106,6 +106,20 @@ public class ERC20Token: IERC20Token {
         }
     }
     
+    public init(xdai: Bool = true) {
+        if xdai {
+            self.name = "xDai"
+            self.address = ""
+            self.decimals = "18"
+            self.symbol = "$"
+        } else {
+            self.name = ""
+            self.address = ""
+            self.decimals = ""
+            self.symbol = ""
+        }
+    }
+    
     public init(token: ERC20Token) {
         self.name = token.name
         self.address = token.address
@@ -137,6 +151,12 @@ public class ERC20Token: IERC20Token {
     
     public func isDai() -> Bool {
         return self == Dai()
+            ? true
+            : false
+    }
+    
+    public func isXDai() -> Bool {
+        return self == XDai()
             ? true
             : false
     }

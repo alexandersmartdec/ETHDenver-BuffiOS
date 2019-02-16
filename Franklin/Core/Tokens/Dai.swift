@@ -10,7 +10,7 @@ import Foundation
 
 public class Dai: ERC20Token {
     public init() {
-        super.init(name: "Dai Stablecoin",
+        super.init(name: "DAI",
                    address: "0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359",
                    decimals: "18",
                    symbol: "DAI")

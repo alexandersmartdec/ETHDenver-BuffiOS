@@ -287,10 +287,22 @@ public class AppController {
         }
     }
     
+    public func addXDai(for wallet: Wallet) throws {
+        let xdai = ERC20Token(xdai: true)
+        
+        do {
+            try wallet.add(token: xdai,
+                           network: Web3Network(id: 100, name: "xDai"))
+        } catch let error {
+            throw error
+        }
+        self.userDefaultKeys.setXDaiAdded(for: wallet)
+    }
+    
     public func addEther(for wallet: Wallet) throws {
         let ether = ERC20Token(ether: true)
         
-        for networkID in 1...42 {
+        for networkID in 1...100 {
             do {
                 try wallet.add(token: ether,
                                network: Web3Network(network: Networks.fromInt(networkID) ?? .Mainnet))
@@ -304,7 +316,7 @@ public class AppController {
     public func addFranklin(for wallet: Wallet) throws {
         let franklin = ERC20Token(franklin: true)
         
-        for networkID in 1...42 {
+        for networkID in 1...99 {
             do {
                 try wallet.add(token: franklin,
                                network: Web3Network(network: Networks.fromInt(networkID) ?? .Mainnet))
@@ -319,7 +331,7 @@ public class AppController {
     public func addDai(for wallet: Wallet) throws {
         let dai = ERC20Token(dai: true)
         
-        for networkID in 1...42 {
+        for networkID in 1...100 {
             do {
                 try wallet.add(token: dai,
                                network: Web3Network(network: Networks.fromInt(networkID) ?? .Mainnet))

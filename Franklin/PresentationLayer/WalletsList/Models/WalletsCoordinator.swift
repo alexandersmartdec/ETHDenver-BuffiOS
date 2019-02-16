@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import BigInt
+import Web3swift
 
 public class WalletsCoordinator {
     
@@ -36,19 +38,29 @@ public class WalletsCoordinator {
     func getDollarsBalance(for wallet: Wallet) -> String {
         do {
             let selectedNetwork = CurrentNetwork.currentNetwork
+            let web3 = CurrentNetwork().isXDai() ? Web3.InfuraMainnetWeb3() : nil
             let tokens = try wallet.getAllTokens(network: selectedNetwork)
             var dollarsWalletBalance: Double = 0
             for token in tokens {
                 let balance: String
-                if token.isEther() {
-                    balance = try wallet.getETHbalance()
-                } else if token.isFranklin() {
-                    balance = try wallet.getFranklinBalance()
+                if let tBalance = token.balance {
+                    balance = tBalance
                 } else {
-                    balance = try wallet.getERC20balance(for: token)
+                    if token.isEther() {
+                        balance = try wallet.getETHbalance(web3instance: web3)
+                    } else if token.isFranklin() {
+                        balance = try wallet.getFranklinBalance()
+                    } else if CurrentNetwork().isXDai() && token.isXDai() {
+                        balance = try wallet.getXDAIBalance()
+                    } else if CurrentNetwork().isXDai() && !(token.isDai() || token.isEther()) {
+                        balance = token.balance ?? "0.0"
+                    } else {
+                        balance = try wallet.getERC20balance(for: token, web3instance: web3)
+                    }
                 }
                 let balanceInDollars: Double
-                if token == Franklin() {
+                let noNeedToConvert = token.isFranklin() || token.isXDai() || CurrentNetwork().isXDai() && !(token.isDai() || token.isEther())
+                if noNeedToConvert {
                     balanceInDollars = Double(balance) ?? 0
                 } else {
                     if let conversion = try? token.updateRateAndChange() {
@@ -61,7 +73,8 @@ public class WalletsCoordinator {
                 }
                 dollarsWalletBalance += balanceInDollars
             }
-            let stringAmount = String(dollarsWalletBalance)
+            let shortend = Double(round(1000*dollarsWalletBalance)/1000)
+            let stringAmount = String(shortend)
             return stringAmount
         } catch {
             return getDollarsBalance(for: wallet)

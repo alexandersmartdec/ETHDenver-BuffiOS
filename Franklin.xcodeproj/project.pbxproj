@@ -12,6 +12,9 @@
 		3A5D7AA8221622FC0032B20C /* FundsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5D7AA6221622FC0032B20C /* FundsCell.swift */; };
 		3A5D7AA9221622FC0032B20C /* FundsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5D7AA7221622FC0032B20C /* FundsCell.xib */; };
 		3A5D7AAB221632410032B20C /* IgnisConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5D7AAA221632410032B20C /* IgnisConstants.swift */; };
+		3A693A452217A45800F385C2 /* XDai.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A693A442217A45800F385C2 /* XDai.swift */; };
+		3A693A482217A8AD00F385C2 /* XDaiURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A693A472217A8AD00F385C2 /* XDaiURLs.swift */; };
+		3A693A4A2217AAC500F385C2 /* BalanceJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A693A492217AAC500F385C2 /* BalanceJSON.swift */; };
 		3A8096CD2212D1CC00DAB8DC /* Dai.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8096CC2212D1CC00DAB8DC /* Dai.swift */; };
 		3A8096D02212E9FC00DAB8DC /* TokenCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8096CE2212E9FC00DAB8DC /* TokenCell.swift */; };
 		3A8096D12212E9FC00DAB8DC /* TokenCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A8096CF2212E9FC00DAB8DC /* TokenCell.xib */; };
@@ -260,6 +263,9 @@
 		3A5D7AA6221622FC0032B20C /* FundsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FundsCell.swift; sourceTree = "<group>"; };
 		3A5D7AA7221622FC0032B20C /* FundsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FundsCell.xib; sourceTree = "<group>"; };
 		3A5D7AAA221632410032B20C /* IgnisConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IgnisConstants.swift; sourceTree = "<group>"; };
+		3A693A442217A45800F385C2 /* XDai.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XDai.swift; sourceTree = "<group>"; };
+		3A693A472217A8AD00F385C2 /* XDaiURLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XDaiURLs.swift; sourceTree = "<group>"; };
+		3A693A492217AAC500F385C2 /* BalanceJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceJSON.swift; sourceTree = "<group>"; };
 		3A8096CC2212D1CC00DAB8DC /* Dai.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dai.swift; sourceTree = "<group>"; };
 		3A8096CE2212E9FC00DAB8DC /* TokenCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenCell.swift; sourceTree = "<group>"; };
 		3A8096CF2212E9FC00DAB8DC /* TokenCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TokenCell.xib; sourceTree = "<group>"; };
@@ -571,6 +577,15 @@
 				1CF54A76215CCF0E009CC78F /* Info.plist */,
 			);
 			path = FranklinTests;
+			sourceTree = "<group>";
+		};
+		3A693A462217A89B00F385C2 /* XDai */ = {
+			isa = PBXGroup;
+			children = (
+				3A693A472217A8AD00F385C2 /* XDaiURLs.swift */,
+				3A693A492217AAC500F385C2 /* BalanceJSON.swift */,
+			);
+			path = XDai;
 			sourceTree = "<group>";
 		};
 		3A8096C92211794600DAB8DC /* NetworksList */ = {
@@ -1123,6 +1138,7 @@
 			isa = PBXGroup;
 			children = (
 				E2A8DAF321F1F6A00031AC58 /* ERC20Token.swift */,
+				3A693A442217A45800F385C2 /* XDai.swift */,
 				E2A8DB9621F616A40031AC58 /* Ether.swift */,
 				E2A8DB9821F616BE0031AC58 /* Franklin.swift */,
 				3A8096CC2212D1CC00DAB8DC /* Dai.swift */,
@@ -1288,6 +1304,7 @@
 			isa = PBXGroup;
 			children = (
 				E2C1102E21E507250012A978 /* NetworkErrors.swift */,
+				3A693A462217A89B00F385C2 /* XDai */,
 				3A8096D522130FCE00DAB8DC /* Ignis */,
 				E2C1102821E507250012A978 /* App */,
 				E2C1102C21E507250012A978 /* Contracts */,
@@ -2325,6 +2342,7 @@
 				E27BF78A21D1447A00951061 /* Block.swift in Sources */,
 				E2B45A2E2174D1CD00F38E50 /* Interactor.swift in Sources */,
 				E27BF78221D1447A00951061 /* PlasmaURLs.swift in Sources */,
+				3A693A4A2217AAC500F385C2 /* BalanceJSON.swift in Sources */,
 				B2091506214A5AD000C8B408 /* WalletCell.swift in Sources */,
 				E27BF77E21D1447A00951061 /* DataExtension.swift in Sources */,
 				B20914FE214A564500C8B408 /* WalletsViewController.swift in Sources */,
@@ -2395,9 +2413,11 @@
 				3A8096DB2213125A00DAB8DC /* IgnisURLs.swift in Sources */,
 				E27BF77821D1447A00951061 /* PlasmaParser.swift in Sources */,
 				E234C79D21E9E93E00F175AF /* TableWallet.swift in Sources */,
+				3A693A482217A8AD00F385C2 /* XDaiURLs.swift in Sources */,
 				9197F32F2144213000C358AA /* NetworksViewController.swift in Sources */,
 				E2C1108521E507340012A978 /* CurrentWallet.swift in Sources */,
 				91B6A7DE2143B2F30033A045 /* AddWalletViewController.swift in Sources */,
+				3A693A452217A45800F385C2 /* XDai.swift in Sources */,
 				E27BF78B21D1447A00951061 /* BlockHelpers.swift in Sources */,
 				E27BF77121D1447A00951061 /* TransactionInput.swift in Sources */,
 				9197F3252144041400C358AA /* SettingsModels.swift in Sources */,
@@ -2623,7 +2643,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = inc.matter.Franklin;
+				PRODUCT_BUNDLE_IDENTIFIER = "inc.matter.Franklin-dev";
 				PRODUCT_NAME = "Franklin-dev";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2734,7 +2754,7 @@
 					"@executable_path/Frameworks",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = inc.matter.Franklin;
+				PRODUCT_BUNDLE_IDENTIFIER = "inc.matter.Franklin-beta";
 				PRODUCT_NAME = "Franklin-beta";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";

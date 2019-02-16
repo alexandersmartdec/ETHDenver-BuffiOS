@@ -175,6 +175,14 @@ class WalletImportingViewController: BasicViewController {
                 let etherAdded = self.userDefaults.isEtherAdded(for: wallet)
                 let franklinAdded = self.userDefaults.isFranklinAdded(for: wallet)
                 let daiAdded = self.userDefaults.isDaiAdded(for: wallet)
+                let xdaiAdded = self.userDefaults.isXDaiAdded(for: wallet)
+                if !xdaiAdded {
+                    do {
+                        try self.appController.addXDai(for: wallet)
+                    } catch let error {
+                        self.finishSavingWallet(with: error, needDeleteWallet: wallet)
+                    }
+                }
                 if !franklinAdded {
                     do {
                         try self.appController.addFranklin(for: wallet)

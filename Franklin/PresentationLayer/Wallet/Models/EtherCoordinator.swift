@@ -38,13 +38,14 @@ public class EtherCoordinator {
     
     func getBalance(for token: ERC20Token, wallet: Wallet) -> String {
         do {
+            let web3 = CurrentNetwork().isXDai() ? Web3.InfuraMainnetWeb3() : nil
             let balance: String
             if token.isEther() {
-                balance = try wallet.getETHbalance()
+                balance = try wallet.getETHbalance(web3instance: web3)
             } else if token.isFranklin() {
                 balance = try wallet.getFranklinBalance()
             } else {
-                balance = try wallet.getERC20balance(for: token)
+                balance = try wallet.getERC20balance(for: token, web3instance: web3)
             }
             return balance
         } catch {

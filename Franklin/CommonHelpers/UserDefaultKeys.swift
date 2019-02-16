@@ -18,6 +18,14 @@ public struct UserDefaultKeys {
         UserDefaults.standard.synchronize()
     }
     
+    public func isXDaiAdded(for wallet: Wallet) -> Bool {
+        return UserDefaults.standard.bool(forKey: "XDaiAddedForWallet\(wallet.address)")
+    }
+    public func setXDaiAdded(for wallet: Wallet) {
+        UserDefaults.standard.set(true, forKey: "XDaiAddedForWallet\(wallet.address)")
+        UserDefaults.standard.synchronize()
+    }
+    
     public func isDaiAdded(for wallet: Wallet) -> Bool {
         return UserDefaults.standard.bool(forKey: "DaiAddedForWallet\(wallet.address)")
     }

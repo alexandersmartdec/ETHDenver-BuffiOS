@@ -44,11 +44,11 @@ class CardCell: UITableViewCell {
     }
 
     func configure(token: TableToken) {
-        let balance = ((token.token.balance ?? "-") + " \(token.token.symbol)")
+        let balance = ((token.token.balance ?? "...") + " \(token.token.symbol)")
         let title = token.token.isFranklin() ?
             "FRANKLIN" :
             token.token.name.uppercased()
-        let accountNumber = token.token.walletAddress?.hideExtraSymbolsInAddress()
+        let accountNumber = token.inWallet.address.hideExtraSymbolsInAddress()
         
         self.balance.text = balance
         self.title.text = title

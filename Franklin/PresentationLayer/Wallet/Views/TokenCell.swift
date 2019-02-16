@@ -19,6 +19,7 @@ class TokenCell: UITableViewCell {
     @IBOutlet weak var tokenImage: UIImageView!
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var balance: UILabel!
+    //@IBOutlet weak var network: UILabel!
     
     override func awakeFromNib() {
         self.balance.font = UIFont(name: Constants.TokenCell.Balance.font, size: Constants.TokenCell.Balance.size)
@@ -29,12 +30,16 @@ class TokenCell: UITableViewCell {
     }
     
     func configure(token: TableToken) {
-        let balance = (token.token.balance ?? "-") + " \(token.token.symbol.uppercased())"
+        let balance = (token.token.balance ?? "...") + " \(token.token.symbol.uppercased())"
         let title = ("\(token.token.name)")
         
         self.balance.text = balance
         self.title.text = title
         self.tokenImage.layer.cornerRadius = self.tokenImage.bounds.height/2
+        
+//        self.network.text = CurrentNetwork().isXDai() && (token.token.isDai() || token.token.isEther()) ?
+//            "on mainnet" :
+//            nil
         
         self.tokenImage.image = UIImage(named: "eth")
         if let url = URL(string: "https://trustwalletapp.com/images/tokens/\(token.token.address).png"), !token.token.isEther() {
@@ -69,5 +74,6 @@ class TokenCell: UITableViewCell {
         super.prepareForReuse()
         self.balance.text = "-"
         self.title.text = "-"
+        //self.network.text = nil
     }
 }

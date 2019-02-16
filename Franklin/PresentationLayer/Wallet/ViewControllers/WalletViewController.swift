@@ -15,7 +15,7 @@ import QRCodeReader
 import secp256k1_swift
 
 enum WalletSections: Int {
-    case franklin = 0
+    case card = 0
     case tokens = 1
 }
 
@@ -31,7 +31,7 @@ class WalletViewController: BasicViewController, ModalViewDelegate {
     private var walletsService = WalletsService()
     private var tokensArray: [TableToken] = []
     
-    private let walletSections: [WalletSections] = [.franklin, .tokens]
+    private let walletSections: [WalletSections] = [.card, .tokens]
 
     private let alerts = Alerts()
     private let etherCoordinator = EtherCoordinator()
@@ -141,7 +141,12 @@ class WalletViewController: BasicViewController, ModalViewDelegate {
         super.viewDidAppear(animated)
         self.setupMarker()
         self.appearAnimation()
-        self.setTokensList()
+        switch CurrentNetwork.currentNetwork.id {
+        case 100:
+            self.setXDai()
+        default:
+            self.setTokensList()
+        }
         
 //        print(CurrentWallet.currentWallet?.address)
 //        print(try? walletsService.getSelectedWallet().address)
@@ -163,6 +168,34 @@ class WalletViewController: BasicViewController, ModalViewDelegate {
 
     func clearData() {
         tokensArray.removeAll()
+    }
+    
+    func setXDai() {
+        DispatchQueue.global().async { [unowned self] in
+            let wallet = CurrentWallet.currentWallet!
+            var tokens = self.etherCoordinator.getTokens()
+            if let ercTokens = try? wallet.getXDAITokens() {
+                let tableTokens: [TableToken] = ercTokens.map {
+                    TableToken(token: $0, inWallet: wallet, isSelected: false)
+                }
+                tokens.append(contentsOf: tableTokens)
+            }
+            self.tokensArray = tokens
+            self.reloadDataInTable(completion: { [unowned self] in
+                self.updateTokensBalances(tokens: tokens) { [unowned self] uTokens in
+                    self.saveTokensBalances(tokens: uTokens)
+                    self.tokensArray = uTokens
+                    self.reloadDataInTable {
+                        self.refreshControl.endRefreshing()
+                        print("Updated")
+                    }
+                    //                    self.reloadDataInTable { [unowned self] in
+                    //                        self.saveTokensBalances()
+                    //                        // TODO: - need to update rates?
+                    //                    }
+                }
+            })
+        }
     }
     
     func setTokensList() {
@@ -199,9 +232,9 @@ class WalletViewController: BasicViewController, ModalViewDelegate {
                 self.refreshControl.endRefreshing()
                 print("Updated")
             }
-//            self.reloadDataInTable { [unowned self] in
-//                self.refreshControl.endRefreshing()
-//            }
+            //            self.reloadDataInTable { [unowned self] in
+            //                self.refreshControl.endRefreshing()
+            //            }
         }
     }
 
@@ -226,7 +259,14 @@ class WalletViewController: BasicViewController, ModalViewDelegate {
                 var currentTableToken = tabToken
                 let currentToken = tabToken.token
                 let currentWallet = tabToken.inWallet
-                let balance: String = self.etherCoordinator.getBalance(for: currentToken, wallet: currentWallet)
+                var balance: String
+                if CurrentNetwork().isXDai() && currentToken.isXDai() {
+                    balance = (try? currentWallet.getXDAIBalance()) ?? "0.0"
+                } else if !CurrentNetwork().isXDai() || (currentToken.isEther() || currentToken.isDai()) {
+                    balance = self.etherCoordinator.getBalance(for: currentToken, wallet: currentWallet)
+                } else {
+                    continue
+                }
                 currentToken.balance = balance
                 currentTableToken.token = currentToken
                 newTokens.append(currentTableToken)
@@ -281,13 +321,15 @@ class WalletViewController: BasicViewController, ModalViewDelegate {
         let token = self.tokensArray[indexPath.row].token
         let wallet = self.tokensArray[indexPath.row].inWallet
         let network = CurrentNetwork.currentNetwork
-        let isEtherToken = token == Ether()
-        let isFranklin = token == Franklin()
+        let isEtherToken = token.isEther()
+        let isDaiToken = token.isDai()
+        let isCard = token.isFranklin() || token.isXDai()
         if isEtherToken {return}
-        if isFranklin {return}
+        if isDaiToken {return}
+        if isCard {return}
         do {
             try wallet.delete(token: token, network: network)
-            CurrentToken.currentToken = Franklin()
+            CurrentToken.currentToken = self.tokensArray[0].token
             self.setTokensList()
         } catch let error {
             self.alerts.showErrorAlert(for: self, error: error, completion: nil)
@@ -460,6 +502,9 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource, Tabl
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if CurrentNetwork().isXDai() {
+            return nil
+        }
         guard let wallet = CurrentWallet.currentWallet else {return nil}
         let background: TableHeader = TableHeader(for: wallet)
         background.delegate = self
@@ -467,8 +512,11 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource, Tabl
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if CurrentNetwork().isXDai() {
+            return 0
+        }
         switch section {
-        case WalletSections.franklin.rawValue:
+        case WalletSections.card.rawValue:
             return 0
         case WalletSections.tokens.rawValue:
             return Constants.Headers.Heights.tokens
@@ -479,7 +527,7 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource, Tabl
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
-        case WalletSections.franklin.rawValue:
+        case WalletSections.card.rawValue:
             return UIScreen.main.bounds.height * Constants.CardCell.heightCoef
         case WalletSections.tokens.rawValue:
             return UIScreen.main.bounds.height * Constants.TokenCell.heightCoef
@@ -489,12 +537,18 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource, Tabl
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
+//        if CurrentNetwork().isXDai() {
+//            return 1
+//        }
         return walletSections.count
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        if CurrentNetwork().isXDai() {
+//            return 1
+//        }
         switch section {
-        case WalletSections.franklin.rawValue:
+        case WalletSections.card.rawValue:
             return 1
         case WalletSections.tokens.rawValue:
             return tokensArray.count - 1
@@ -505,16 +559,16 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource, Tabl
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tokensArray.isEmpty {return UITableViewCell()}
-        let franklin = tokensArray[0]
+        let card = tokensArray[0]
         var tokens = tokensArray
         tokens.removeFirst()
         switch indexPath.section {
-        case WalletSections.franklin.rawValue:
+        case WalletSections.card.rawValue:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "CardCell",
                                                            for: indexPath) as? CardCell else {
                                                             return UITableViewCell()
             }
-            let tableToken = franklin
+            let tableToken = card
             cell.configure(token: tableToken)
             cell.delegate = self
             return cell
@@ -535,8 +589,8 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource, Tabl
         guard let indexPathForSelectedRow = tableView.indexPathForSelectedRow else {
             return
         }
-        let isFranklin = indexPath.section == WalletSections.franklin.rawValue
-        let cell = isFranklin ?
+        let isCard = indexPath.section == WalletSections.card.rawValue
+        let cell = isCard ?
             tableView.cellForRow(at: indexPathForSelectedRow) as? CardCell :
             tableView.cellForRow(at: indexPathForSelectedRow) as? TokenCell
         guard let selectedCell = cell else {
@@ -545,10 +599,10 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource, Tabl
         guard let indexPathTapped = self.walletTableView.indexPath(for: selectedCell) else {
             return
         }
-        let tableToken = isFranklin ?
+        let tableToken = isCard ?
             self.tokensArray[0] :
             self.tokensArray[indexPathTapped.row+1]
-        if isFranklin {
+        if isCard {
             self.showAlert(token: tableToken.token)
         } else {
             self.showSend(token: tableToken.token)
@@ -562,7 +616,10 @@ extension WalletViewController: UITableViewDelegate, UITableViewDataSource, Tabl
     }
 
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        if indexPath.section == WalletSections.franklin.rawValue {
+        if CurrentNetwork().isXDai() {
+            return false
+        }
+        if indexPath.section == WalletSections.card.rawValue {
             return false
         }
         let cell = tableView.cellForRow(at: indexPath) as? TokenCell
