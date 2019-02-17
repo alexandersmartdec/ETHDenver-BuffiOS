@@ -327,19 +327,19 @@ class SendMoneyController: BasicViewController, ModalViewDelegate {
         self.screenStatus = .start
         UIView.animate(withDuration: animated ?
             Constants.ModalView.animationDuration : 0) { [unowned self] in
-            self.mainButton.isEnabled = true
+                self.mainButton.isEnabled = true
                 
-            self.setTitle(text: "Send money", color: Colors.mainBlue)
-            self.showGif(false)
-            self.setBottomLabel(text: "Or share via", color: Colors.textLightGray, hidden: false)
-            self.setCollectionView(hidden: true)
-            self.setBottomButton(text: "Other app...", imageName: "share-blue", backgroundColor: Colors.textWhite, textColor: Colors.mainBlue, hidden: false, borderNeeded: true)
-            self.setTopButton(text: "Send", imageName: "send-white", backgroundColor: Colors.orange, textColor: Colors.textWhite, hidden: false, borderNeeded: false)
+                self.setTitle(text: "Send money", color: Colors.mainBlue)
+                self.showGif(false)
+                self.setBottomLabel(text: "Or share via", color: Colors.textLightGray, hidden: false)
+                self.setCollectionView(hidden: true)
+                self.setBottomButton(text: "Other app...", imageName: "share-blue", backgroundColor: Colors.textWhite, textColor: Colors.mainBlue, hidden: false, borderNeeded: true)
+                self.setTopButton(text: "Send", imageName: "send-white", backgroundColor: Colors.orange, textColor: Colors.textWhite, hidden: false, borderNeeded: false)
                 self.setTopStack(hidden: false, interactive: true, placeholder: "Amount in \(self.chosenToken?.symbol.uppercased() ?? "Unknown currency")", labelText: "Amount (\(self.chosenToken?.symbol.uppercased() ?? "Unknown currency")):")
-            self.setMiddleStack(hidden: false, interactive: true, placeholder: "Search by name", labelText: "Send to:", position: self.searchStackOrigin)
-            self.setBottomStack(hidden: false, interactive: true, placeholder: "Enter address", labelText: "Enter address:")
-            self.setContactStack(hidden: true, interactive: false, contact: nil, labelText: "or send to contact:")
-            self.setReadyIcon(hidden: true)
+                self.setMiddleStack(hidden: false, interactive: true, placeholder: "Search by name", labelText: "Send to:", position: self.searchStackOrigin)
+                self.setBottomStack(hidden: false, interactive: true, placeholder: "Enter address", labelText: "Enter address:")
+                self.setContactStack(hidden: true, interactive: false, contact: nil, labelText: "or send to contact:")
+                self.setReadyIcon(hidden: true)
         }
     }
     
@@ -367,39 +367,39 @@ class SendMoneyController: BasicViewController, ModalViewDelegate {
         
         UIView.animate(withDuration: animated ?
             Constants.ModalView.animationDuration : 0) { [unowned self] in
-            self.mainButton.isEnabled = true
+                self.mainButton.isEnabled = true
                 
-            self.setTitle(text: "Send money", color: Colors.mainBlue)
-            self.showGif(false)
-            self.setBottomLabel(text: "Or share via", color: Colors.textLightGray, hidden: true)
-            self.setCollectionView(hidden: true)
-            self.setBottomButton(text: "Send to \(contact.name)", imageName: "ssend-white", backgroundColor: Colors.orange, textColor: Colors.textWhite, hidden: false, borderNeeded: false)
-            self.setTopButton(text: "Send", imageName: "send-white", backgroundColor: Colors.orange, textColor: Colors.textWhite, hidden: true, borderNeeded: false)
-            self.setTopStack(hidden: false, interactive: true, placeholder: "Amount in \(self.chosenToken?.symbol.uppercased() ?? "Unknown currency")", labelText: "Amount (\(self.chosenToken?.symbol.uppercased() ?? "Unknown currency")):")
-            self.setMiddleStack(hidden: true, interactive: false, placeholder: "Search by name", labelText: "Send to:", position: self.searchStackOrigin)
-            self.setBottomStack(hidden: true, interactive: false, placeholder: "Enter address", labelText: "Enter address:")
-            self.setContactStack(hidden: false, interactive: true, contact: contact, labelText: "or send to contact:")
-            self.setReadyIcon(hidden: true)
+                self.setTitle(text: "Send money", color: Colors.mainBlue)
+                self.showGif(false)
+                self.setBottomLabel(text: "Or share via", color: Colors.textLightGray, hidden: true)
+                self.setCollectionView(hidden: true)
+                self.setBottomButton(text: "Send to \(contact.name)", imageName: "ssend-white", backgroundColor: Colors.orange, textColor: Colors.textWhite, hidden: false, borderNeeded: false)
+                self.setTopButton(text: "Send", imageName: "send-white", backgroundColor: Colors.orange, textColor: Colors.textWhite, hidden: true, borderNeeded: false)
+                self.setTopStack(hidden: false, interactive: true, placeholder: "Amount in \(self.chosenToken?.symbol.uppercased() ?? "Unknown currency")", labelText: "Amount (\(self.chosenToken?.symbol.uppercased() ?? "Unknown currency")):")
+                self.setMiddleStack(hidden: true, interactive: false, placeholder: "Search by name", labelText: "Send to:", position: self.searchStackOrigin)
+                self.setBottomStack(hidden: true, interactive: false, placeholder: "Enter address", labelText: "Enter address:")
+                self.setContactStack(hidden: false, interactive: true, contact: contact, labelText: "or send to contact:")
+                self.setReadyIcon(hidden: true)
         }
     }
     
     @objc func showSending(animated: Bool) {
         self.screenStatus = .sending
+        self.showGif(true)
         UIView.animate(withDuration: animated ?
             Constants.ModalView.animationDuration : 0, animations: { [unowned self] in
-            self.mainButton.isEnabled = true
+                self.mainButton.isEnabled = true
                 
-            self.setTitle(text: "Sending...", color: Colors.mainBlue)
-            self.showGif(true)
-            self.setBottomLabel(text: "Or share via", color: Colors.textLightGray, hidden: true)
-            self.setCollectionView(hidden: true)
-            self.setBottomButton(text: nil, imageName: nil, backgroundColor: Colors.orange, textColor: Colors.textWhite, hidden: true, borderNeeded: false)
-            self.setTopButton(text: nil, imageName: nil, backgroundColor: Colors.orange, textColor: Colors.textWhite, hidden: true, borderNeeded: false)
-            self.setTopStack(hidden: false, interactive: true, placeholder: "Amount in \(self.chosenToken?.symbol.uppercased() ?? "Unknown currency")", labelText: "Amount (\(self.chosenToken?.symbol.uppercased() ?? "Unknown currency")):")
-            self.setMiddleStack(hidden: true, interactive: false, placeholder: "Search by name", labelText: "Send to:", position: self.searchStackOrigin)
-            self.setBottomStack(hidden: true, interactive: false, placeholder: "Enter address", labelText: "Enter address:")
-            self.setContactStack(hidden: false, interactive: true, contact: self.chosenContact, labelText: "or send to contact:")
-            self.setReadyIcon(hidden: true)
+                self.setTitle(text: "Sending...", color: Colors.mainBlue)
+                self.setBottomLabel(text: "Or share via", color: Colors.textLightGray, hidden: true)
+                self.setCollectionView(hidden: true)
+                self.setBottomButton(text: nil, imageName: nil, backgroundColor: Colors.orange, textColor: Colors.textWhite, hidden: true, borderNeeded: false)
+                self.setTopButton(text: nil, imageName: nil, backgroundColor: Colors.orange, textColor: Colors.textWhite, hidden: true, borderNeeded: false)
+                self.setTopStack(hidden: false, interactive: true, placeholder: "Amount in \(self.chosenToken?.symbol.uppercased() ?? "Unknown currency")", labelText: "Amount (\(self.chosenToken?.symbol.uppercased() ?? "Unknown currency")):")
+                self.setMiddleStack(hidden: true, interactive: false, placeholder: "Search by name", labelText: "Send to:", position: self.searchStackOrigin)
+                self.setBottomStack(hidden: true, interactive: false, placeholder: "Enter address", labelText: "Enter address:")
+                self.setContactStack(hidden: false, interactive: true, contact: self.chosenContact, labelText: "or send to contact:")
+                self.setReadyIcon(hidden: true)
         }) { [unowned self] (completed) in
             if completed {
                 self.sending()
@@ -414,6 +414,22 @@ class SendMoneyController: BasicViewController, ModalViewDelegate {
             guard let address = self.chosenContact?.address else { return }
             do {
                 let tx = try wallet.prepareSendERC20Tx(token: token, toAddress: address, tokenAmount: amount, gasLimit: .automatic, gasPrice: .automatic)
+                let password = try wallet.getPassword()
+                let result = try wallet.sendTx(transaction: tx, options: nil, password: password)
+                self.showReady(animated: true)
+            } catch let error {
+                return
+            }
+        }
+    }
+    
+    func sendTokenXDai(_ token: ERC20Token) {
+        DispatchQueue.global().async {
+            guard let wallet = CurrentWallet.currentWallet else { return }
+            guard let amount = self.amountTextField.text else { return }
+            guard let address = self.chosenContact?.address else { return }
+            do {
+                let tx = try wallet.prepareSendERC20XDaiTx(token: token, toAddress: address, tokenAmount: amount, gasLimit: .automatic, gasPrice: .automatic)
                 let password = try wallet.getPassword()
                 let result = try wallet.sendTx(transaction: tx, options: nil, password: password)
                 self.showReady(animated: true)
@@ -439,34 +455,54 @@ class SendMoneyController: BasicViewController, ModalViewDelegate {
         }
     }
     
+    func sendXDai() {
+        DispatchQueue.global().async {
+            guard let wallet = CurrentWallet.currentWallet else { return }
+            guard let amount = self.amountTextField.text else { return }
+            guard let address = self.chosenContact?.address else { return }
+            do {
+                let password = try wallet.getPassword()
+                let tx = try wallet.prepareSendXDaiTx(toAddress: address, value: amount)
+                let result = try wallet.sendTx(transaction: tx, options: nil, password: password)
+                self.showReady(animated: true)
+            } catch let error {
+                return
+            }
+        }
+    }
+    
     func sending() {
         guard let token = self.chosenToken else { return }
         if token.isFranklin() {
             self.animationTimer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: false)
+        } else if token.isXDai() {
+            self.sendXDai()
         } else if token.isEther() {
             self.sendEther()
-        } else {
+        } else if !CurrentNetwork().isXDai() {
             self.sendToken(token)
+        } else {
+            self.sendTokenXDai(token)
         }
-//        guard let address = chosenContact?.address ?? addressTextField.text else {
-//            self.showReady(animated: true)
-//        }
-//        guard let ethAddress = EthereumAddress(address) else {
-//            self.showReady(animated: true)
-//        }
-//        guard let amount = amountTextField.text else {
-//            self.showReady(animated: true)
-//        }
-//        guard let wallet = CurrentWallet.currentWallet else {
-//            self.showReady(animated: true)
-//        }
-//        let currentNetwork = CurrentNetwork.currentNetwork
-//        do {
-//            try wallet.sendPlasmaTx(nonce: CurrentNonce.currentNonce ?? 0, to: ethAddress, value: amount, network: currentNetwork)
-//            self.showReady(animated: true)
-//        } catch {
-//            self.showReady(animated: true)
-//        }
+        //        guard let address = chosenContact?.address ?? addressTextField.text else {
+        //            self.showReady(animated: true)
+        //        }
+        //        guard let ethAddress = EthereumAddress(address) else {
+        //            self.showReady(animated: true)
+        //        }
+        //        guard let amount = amountTextField.text else {
+        //            self.showReady(animated: true)
+        //        }
+        //        guard let wallet = CurrentWallet.currentWallet else {
+        //            self.showReady(animated: true)
+        //        }
+        //        let currentNetwork = CurrentNetwork.currentNetwork
+        //        do {
+        //            try wallet.sendPlasmaTx(nonce: CurrentNonce.currentNonce ?? 0, to: ethAddress, value: amount, network: currentNetwork)
+        //            self.showReady(animated: true)
+        //        } catch {
+        //            self.showReady(animated: true)
+        //        }
     }
     
     @objc func fireTimer() {
@@ -476,25 +512,27 @@ class SendMoneyController: BasicViewController, ModalViewDelegate {
     
     @objc func showReady(animated: Bool) {
         self.screenStatus = .ready
-        guard let contact = self.chosenContact else {return}
-        UIView.animate(withDuration: animated ?
-            Constants.ModalView.animationDuration : 0) { [unowned self] in
-            self.setReadyIcon(hidden: false)
-        }
-        UIView.animate(withDuration: animated ?
-            Constants.ModalView.animationDuration : 0) { [unowned self] in
-            self.mainButton.isEnabled = true
-                
-            self.setTitle(text: "Sent!", color: Colors.mainGreen)
+        DispatchQueue.main.async {
             self.showGif(false)
-            self.setBottomLabel(text: "Or share via", color: Colors.textLightGray, hidden: true)
-            self.setCollectionView(hidden: true)
-            self.setBottomButton(text: "Close", imageName: nil, backgroundColor: Colors.mainBlue, textColor: Colors.textWhite, hidden: false, borderNeeded: true)
-            self.setTopButton(text: "Save contact", imageName: "add-contacts", backgroundColor: Colors.textWhite, textColor: Colors.mainBlue, hidden: contact.name == "" ? false : true, borderNeeded: true)
-            self.setTopStack(hidden: false, interactive: false, placeholder: "Amount in \(self.chosenToken?.symbol.uppercased() ?? "Unknown currency")", labelText: "Amount (\(self.chosenToken?.symbol.uppercased() ?? "Unknown currency")):")
-            self.setMiddleStack(hidden: true, interactive: false, placeholder: "Search by name", labelText: "Send to:", position: self.searchStackOrigin)
-            self.setBottomStack(hidden: true, interactive: false, placeholder: "Enter address", labelText: "Enter address:")
-            self.setContactStack(hidden: false, interactive: false, contact: self.chosenContact, labelText: "or send to contact:")
+            guard let contact = self.chosenContact else {return}
+            UIView.animate(withDuration: animated ?
+                Constants.ModalView.animationDuration : 0) { [unowned self] in
+                    self.setReadyIcon(hidden: false)
+            }
+            UIView.animate(withDuration: animated ?
+                Constants.ModalView.animationDuration : 0) { [unowned self] in
+                    self.mainButton.isEnabled = true
+                    
+                    self.setTitle(text: "Sent!", color: Colors.mainGreen)
+                    self.setBottomLabel(text: "Or share via", color: Colors.textLightGray, hidden: true)
+                    self.setCollectionView(hidden: true)
+                    self.setBottomButton(text: "Close", imageName: nil, backgroundColor: Colors.mainBlue, textColor: Colors.textWhite, hidden: false, borderNeeded: true)
+                    self.setTopButton(text: "Save contact", imageName: "add-contacts", backgroundColor: Colors.textWhite, textColor: Colors.mainBlue, hidden: contact.name == "" ? false : true, borderNeeded: true)
+                    self.setTopStack(hidden: false, interactive: false, placeholder: "Amount in \(self.chosenToken?.symbol.uppercased() ?? "Unknown currency")", labelText: "Amount (\(self.chosenToken?.symbol.uppercased() ?? "Unknown currency")):")
+                    self.setMiddleStack(hidden: true, interactive: false, placeholder: "Search by name", labelText: "Send to:", position: self.searchStackOrigin)
+                    self.setBottomStack(hidden: true, interactive: false, placeholder: "Enter address", labelText: "Enter address:")
+                    self.setContactStack(hidden: false, interactive: false, contact: self.chosenContact, labelText: "or send to contact:")
+            }
         }
     }
     
@@ -502,19 +540,19 @@ class SendMoneyController: BasicViewController, ModalViewDelegate {
         self.screenStatus = .saving
         UIView.animate(withDuration: animated ?
             Constants.ModalView.animationDuration : 0) { [unowned self] in
-            self.mainButton.isEnabled = true
+                self.mainButton.isEnabled = true
                 
-            self.setTitle(text: "Add contact", color: Colors.mainBlue)
-            self.showGif(false)
-            self.setBottomLabel(text: "Or share via", color: Colors.textLightGray, hidden: true)
-            self.setCollectionView(hidden: true)
-            self.setBottomButton(text: "Close", imageName: nil, backgroundColor: Colors.textWhite, textColor: Colors.mainBlue, hidden: false, borderNeeded: true)
-            self.setTopButton(text: "Save", imageName: "button-save", backgroundColor: Colors.mainGreen, textColor: Colors.textWhite, hidden: false, borderNeeded: false)
-            self.setTopStack(hidden: false, interactive: true, placeholder: "Enter name", labelText: "Contact name:", resetText: true, keyboardType: .default)
-            self.setMiddleStack(hidden: true, interactive: false, placeholder: "Search by name", labelText: "Send to:", position: self.searchStackOrigin)
-            self.setBottomStack(hidden: true, interactive: false, placeholder: "Enter address", labelText: "Enter address:")
-            self.setContactStack(hidden: true, interactive: false, contact: self.chosenContact, labelText: "or send to contact:")
-            self.setReadyIcon(hidden: true)
+                self.setTitle(text: "Add contact", color: Colors.mainBlue)
+                self.showGif(false)
+                self.setBottomLabel(text: "Or share via", color: Colors.textLightGray, hidden: true)
+                self.setCollectionView(hidden: true)
+                self.setBottomButton(text: "Close", imageName: nil, backgroundColor: Colors.textWhite, textColor: Colors.mainBlue, hidden: false, borderNeeded: true)
+                self.setTopButton(text: "Save", imageName: "button-save", backgroundColor: Colors.mainGreen, textColor: Colors.textWhite, hidden: false, borderNeeded: false)
+                self.setTopStack(hidden: false, interactive: true, placeholder: "Enter name", labelText: "Contact name:", resetText: true, keyboardType: .default)
+                self.setMiddleStack(hidden: true, interactive: false, placeholder: "Search by name", labelText: "Send to:", position: self.searchStackOrigin)
+                self.setBottomStack(hidden: true, interactive: false, placeholder: "Enter address", labelText: "Enter address:")
+                self.setContactStack(hidden: true, interactive: false, contact: self.chosenContact, labelText: "or send to contact:")
+                self.setReadyIcon(hidden: true)
         }
     }
     
@@ -531,30 +569,30 @@ class SendMoneyController: BasicViewController, ModalViewDelegate {
         switch screenStatus {
         case .start:
             alerts.showErrorAlert(for: self, error: "Coming soon", completion: nil)
-//            guard let text = self.amountTextField.text else {
-//                self.amountTextField.attributedPlaceholder = NSAttributedString(string: "Please, fill this field",
-//                                                                                attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
-//                return
-//            }
-//            guard let amount = Float(text) else {
-//                self.amountTextField.attributedPlaceholder = NSAttributedString(string: "Please, fill this field",
-//                                                                       attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
-//                return
-//            }
-//            guard amount > 0 else {
-//                self.amountTextField.attributedPlaceholder = NSAttributedString(string: "Should be more",
-//                                                                                attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
-//                return
-//            }
-//
-//            let stringToShare = "I have sent you a cheque of \(text)"
-//
-//            let itemsToShare = [ stringToShare ]
-//            let activityViewController = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
-//            activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
-//            // exclude some activity types from the list (optional)
-//            activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop, UIActivity.ActivityType.mail, UIActivity.ActivityType.message, UIActivity.ActivityType.copyToPasteboard, UIActivity.ActivityType.markupAsPDF ]
-//            self.present(activityViewController, animated: true, completion: nil)
+            //            guard let text = self.amountTextField.text else {
+            //                self.amountTextField.attributedPlaceholder = NSAttributedString(string: "Please, fill this field",
+            //                                                                                attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
+            //                return
+            //            }
+            //            guard let amount = Float(text) else {
+            //                self.amountTextField.attributedPlaceholder = NSAttributedString(string: "Please, fill this field",
+            //                                                                       attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
+            //                return
+            //            }
+            //            guard amount > 0 else {
+            //                self.amountTextField.attributedPlaceholder = NSAttributedString(string: "Should be more",
+            //                                                                                attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
+            //                return
+            //            }
+            //
+            //            let stringToShare = "I have sent you a cheque of \(text)"
+            //
+            //            let itemsToShare = [ stringToShare ]
+            //            let activityViewController = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
+            //            activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+            //            // exclude some activity types from the list (optional)
+            //            activityViewController.excludedActivityTypes = [ UIActivity.ActivityType.airDrop, UIActivity.ActivityType.mail, UIActivity.ActivityType.message, UIActivity.ActivityType.copyToPasteboard, UIActivity.ActivityType.markupAsPDF ]
+        //            self.present(activityViewController, animated: true, completion: nil)
         case .searching:
             chosenContact = nil
             showStart(animated: true)
@@ -619,7 +657,7 @@ class SendMoneyController: BasicViewController, ModalViewDelegate {
             guard let address = self.addressTextField.text, !address.isEmpty else {
                 self.addressTextField.text = nil
                 self.addressTextField.attributedPlaceholder = NSAttributedString(string: "Please, enter address",
-                                                                                attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
+                                                                                 attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
                 return
             }
             guard let ethAddress = EthereumAddress(address) else {

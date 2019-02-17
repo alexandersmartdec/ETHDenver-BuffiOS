@@ -444,7 +444,7 @@ class WalletViewController: BasicViewController, ModalViewDelegate {
                     let web3 = CurrentNetwork().isXDai() ? Web3.InfuraMainnetWeb3() : nil
                     
                     let password = try wallet.getPassword()
-                    let tx = try wallet.prepareWriteContractTx(web3instance: web3, contractABI: ABIs.uniswap, contractAddress: Addresses.uniswap, contractMethod: "ethToTokenSwapInput", value: amount, gasLimit: .automatic, gasPrice: .automatic, parameters: [minTokens, timestamp] as [AnyObject], extraData: Data())
+                    let tx = try wallet.prepareWriteContractTx(web3instance: web3, contractABI: ABIs.uniswap, contractAddress: Addresses.uniswapDai, contractMethod: "ethToTokenSwapInput", value: amount, gasLimit: .automatic, gasPrice: .automatic, parameters: [minTokens, timestamp] as [AnyObject], extraData: Data())
                     let result = try wallet.sendTx(transaction: tx, options: nil, password: password)
                 } catch let error {
                     self.showAlert(error: error.localizedDescription)
@@ -490,7 +490,7 @@ class WalletViewController: BasicViewController, ModalViewDelegate {
                     let web3 = CurrentNetwork().isXDai() ? Web3.InfuraMainnetWeb3() : nil
                     
                     let password = try wallet.getPassword()
-                    let tx = try wallet.prepareWriteContractTx(web3instance: web3, contractABI: ABIs.uniswap, contractAddress: Addresses.uniswap, contractMethod: "tokenToEthSwapInput", value: "0.0", gasLimit: .automatic, gasPrice: .automatic, parameters: [tokens, minEth, timestamp] as [AnyObject], extraData: Data())
+                    let tx = try wallet.prepareWriteContractTx(web3instance: web3, contractABI: ABIs.uniswap, contractAddress: Addresses.uniswapDai, contractMethod: "tokenToEthSwapInput", value: "0.0", gasLimit: .automatic, gasPrice: .automatic, parameters: [tokens, minEth, timestamp] as [AnyObject], extraData: Data())
                     let result = try wallet.sendTx(transaction: tx, options: nil, password: password)
                 } catch let error {
                     self.showAlert(error: error.localizedDescription)
@@ -685,15 +685,18 @@ class WalletViewController: BasicViewController, ModalViewDelegate {
         alert.addAction(UIAlertAction(title: "Send", style: .default, handler: { [unowned self] (action) in
             self.showSend(token: token)
         }))
-        if !token.isEther() {
+//        if !token.isEther() {
+//            alert.addAction(UIAlertAction(title: "Buy by Ether", style: .default, handler: { [unowned self] (action) in
+//                self.showBuy(token: token)
+//            }))
+////            alert.addAction(UIAlertAction(title: "Sell for Ether", style: .default, handler: { [unowned self] (action) in
+////                self.showSell(token: token)
+////            }))
+//        }
+        if token.isDai() {
             alert.addAction(UIAlertAction(title: "Buy by Ether", style: .default, handler: { [unowned self] (action) in
                 self.showBuy(token: token)
             }))
-//            alert.addAction(UIAlertAction(title: "Sell for Ether", style: .default, handler: { [unowned self] (action) in
-//                self.showSell(token: token)
-//            }))
-        }
-        if token.isDai() {
             alert.addAction(UIAlertAction(title: "Convert to xDai", style: .default, handler: { [unowned self] (action) in
                 self.showConvertToXDai(token: token)
             }))
