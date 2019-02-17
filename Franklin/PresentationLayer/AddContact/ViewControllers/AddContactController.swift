@@ -75,6 +75,8 @@ class AddContactController: BasicViewController {
     }
     
     func mainSetup() {
+        self.hideKeyboardWhenTappedAround()
+        
         self.navigationController?.navigationBar.isHidden = true
         enterButton.isEnabled = false
         updateEnterButtonAlpha()

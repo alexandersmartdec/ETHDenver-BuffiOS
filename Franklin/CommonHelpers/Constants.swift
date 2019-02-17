@@ -177,6 +177,8 @@ public struct Constants {
     
     public struct TableCells {
         public struct Heights {
+            static let deposits: CGFloat = 60
+            static let credits: CGFloat = 60
             static let settings: CGFloat = 45
             static let contacts: CGFloat = 90
             static let networks: CGFloat = 90

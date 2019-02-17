@@ -17,6 +17,29 @@
 		3A693A4A2217AAC500F385C2 /* BalanceJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A693A492217AAC500F385C2 /* BalanceJSON.swift */; };
 		3A693A4C2218746200F385C2 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A693A4B2218746200F385C2 /* DateExtension.swift */; };
 		3A693A4E2218EBBC00F385C2 /* Buff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A693A4D2218EBBC00F385C2 /* Buff.swift */; };
+		3A693A5D2219238D00F385C2 /* ShopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A693A512219238C00F385C2 /* ShopViewController.xib */; };
+		3A693A5F2219238D00F385C2 /* ShopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A693A532219238C00F385C2 /* ShopCell.swift */; };
+		3A693A632219238D00F385C2 /* ShopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A693A572219238C00F385C2 /* ShopCell.xib */; };
+		3A693A662219238D00F385C2 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A693A5C2219238D00F385C2 /* ShopViewController.swift */; };
+		3A693A73221937A200F385C2 /* CreditsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A693A6B221937A200F385C2 /* CreditsViewController.xib */; };
+		3A693A74221937A200F385C2 /* CreditCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A693A6C221937A200F385C2 /* CreditCell.xib */; };
+		3A693A75221937A200F385C2 /* CreditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A693A6D221937A200F385C2 /* CreditCell.swift */; };
+		3A693A76221937A200F385C2 /* TableCredit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A693A6F221937A200F385C2 /* TableCredit.swift */; };
+		3A693A77221937A200F385C2 /* CreditsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A693A70221937A200F385C2 /* CreditsCoordinator.swift */; };
+		3A693A78221937A200F385C2 /* CreditsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A693A72221937A200F385C2 /* CreditsViewController.swift */; };
+		3A693A82221937A700F385C2 /* DepositsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A693A7A221937A700F385C2 /* DepositsViewController.xib */; };
+		3A693A83221937A700F385C2 /* DepositCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A693A7B221937A700F385C2 /* DepositCell.xib */; };
+		3A693A84221937A700F385C2 /* DepositCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A693A7C221937A700F385C2 /* DepositCell.swift */; };
+		3A693A85221937A700F385C2 /* TableDeposit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A693A7E221937A700F385C2 /* TableDeposit.swift */; };
+		3A693A86221937A700F385C2 /* DepositsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A693A7F221937A700F385C2 /* DepositsCoordinator.swift */; };
+		3A693A87221937A700F385C2 /* DepositsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A693A81221937A700F385C2 /* DepositsViewController.swift */; };
+		3A693A8D22194CB200F385C2 /* AddDepositViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A693A8A22194CB200F385C2 /* AddDepositViewController.xib */; };
+		3A693A8E22194CB200F385C2 /* AddDepositViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A693A8C22194CB200F385C2 /* AddDepositViewController.swift */; };
+		3A693A9122195E2200F385C2 /* BuffiParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A693A9022195E2200F385C2 /* BuffiParser.swift */; };
+		3A693A9A2219616F00F385C2 /* PayForCheque.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A693A952219616F00F385C2 /* PayForCheque.swift */; };
+		3A693A9B2219616F00F385C2 /* DeeplinkPayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A693A962219616F00F385C2 /* DeeplinkPayViewController.swift */; };
+		3A693A9C2219616F00F385C2 /* DeeplinkPayVIewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A693A982219616F00F385C2 /* DeeplinkPayVIewController.xib */; };
+		3A693A9D2219616F00F385C2 /* PayForCheque.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A693A992219616F00F385C2 /* PayForCheque.xib */; };
 		3A8096CD2212D1CC00DAB8DC /* Dai.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8096CC2212D1CC00DAB8DC /* Dai.swift */; };
 		3A8096D02212E9FC00DAB8DC /* TokenCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8096CE2212E9FC00DAB8DC /* TokenCell.swift */; };
 		3A8096D12212E9FC00DAB8DC /* TokenCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A8096CF2212E9FC00DAB8DC /* TokenCell.xib */; };
@@ -270,6 +293,29 @@
 		3A693A492217AAC500F385C2 /* BalanceJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceJSON.swift; sourceTree = "<group>"; };
 		3A693A4B2218746200F385C2 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		3A693A4D2218EBBC00F385C2 /* Buff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buff.swift; sourceTree = "<group>"; };
+		3A693A512219238C00F385C2 /* ShopViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShopViewController.xib; sourceTree = "<group>"; };
+		3A693A532219238C00F385C2 /* ShopCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopCell.swift; sourceTree = "<group>"; };
+		3A693A572219238C00F385C2 /* ShopCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShopCell.xib; sourceTree = "<group>"; };
+		3A693A5C2219238D00F385C2 /* ShopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
+		3A693A6B221937A200F385C2 /* CreditsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreditsViewController.xib; sourceTree = "<group>"; };
+		3A693A6C221937A200F385C2 /* CreditCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreditCell.xib; sourceTree = "<group>"; };
+		3A693A6D221937A200F385C2 /* CreditCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditCell.swift; sourceTree = "<group>"; };
+		3A693A6F221937A200F385C2 /* TableCredit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableCredit.swift; sourceTree = "<group>"; };
+		3A693A70221937A200F385C2 /* CreditsCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditsCoordinator.swift; sourceTree = "<group>"; };
+		3A693A72221937A200F385C2 /* CreditsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditsViewController.swift; sourceTree = "<group>"; };
+		3A693A7A221937A700F385C2 /* DepositsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DepositsViewController.xib; sourceTree = "<group>"; };
+		3A693A7B221937A700F385C2 /* DepositCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DepositCell.xib; sourceTree = "<group>"; };
+		3A693A7C221937A700F385C2 /* DepositCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepositCell.swift; sourceTree = "<group>"; };
+		3A693A7E221937A700F385C2 /* TableDeposit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableDeposit.swift; sourceTree = "<group>"; };
+		3A693A7F221937A700F385C2 /* DepositsCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepositsCoordinator.swift; sourceTree = "<group>"; };
+		3A693A81221937A700F385C2 /* DepositsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepositsViewController.swift; sourceTree = "<group>"; };
+		3A693A8A22194CB200F385C2 /* AddDepositViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddDepositViewController.xib; sourceTree = "<group>"; };
+		3A693A8C22194CB200F385C2 /* AddDepositViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDepositViewController.swift; sourceTree = "<group>"; };
+		3A693A9022195E2200F385C2 /* BuffiParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuffiParser.swift; sourceTree = "<group>"; };
+		3A693A952219616F00F385C2 /* PayForCheque.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayForCheque.swift; sourceTree = "<group>"; };
+		3A693A962219616F00F385C2 /* DeeplinkPayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeeplinkPayViewController.swift; sourceTree = "<group>"; };
+		3A693A982219616F00F385C2 /* DeeplinkPayVIewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeeplinkPayVIewController.xib; sourceTree = "<group>"; };
+		3A693A992219616F00F385C2 /* PayForCheque.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PayForCheque.xib; sourceTree = "<group>"; };
 		3A8096CC2212D1CC00DAB8DC /* Dai.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dai.swift; sourceTree = "<group>"; };
 		3A8096CE2212E9FC00DAB8DC /* TokenCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenCell.swift; sourceTree = "<group>"; };
 		3A8096CF2212E9FC00DAB8DC /* TokenCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TokenCell.xib; sourceTree = "<group>"; };
@@ -592,6 +638,167 @@
 			path = XDai;
 			sourceTree = "<group>";
 		};
+		3A693A4F2219218C00F385C2 /* Shop */ = {
+			isa = PBXGroup;
+			children = (
+				3A693A5B2219238D00F385C2 /* ViewControllers */,
+				3A693A502219238C00F385C2 /* Views */,
+			);
+			path = Shop;
+			sourceTree = "<group>";
+		};
+		3A693A502219238C00F385C2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3A693A512219238C00F385C2 /* ShopViewController.xib */,
+				3A693A532219238C00F385C2 /* ShopCell.swift */,
+				3A693A572219238C00F385C2 /* ShopCell.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3A693A5B2219238D00F385C2 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				3A693A5C2219238D00F385C2 /* ShopViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		3A693A682219364100F385C2 /* Deposit */ = {
+			isa = PBXGroup;
+			children = (
+				3A693A7D221937A700F385C2 /* Models */,
+				3A693A80221937A700F385C2 /* ViewControllers */,
+				3A693A79221937A700F385C2 /* Views */,
+			);
+			path = Deposit;
+			sourceTree = "<group>";
+		};
+		3A693A692219364C00F385C2 /* Credit */ = {
+			isa = PBXGroup;
+			children = (
+				3A693A6E221937A200F385C2 /* Models */,
+				3A693A71221937A200F385C2 /* ViewControllers */,
+				3A693A6A221937A200F385C2 /* Views */,
+			);
+			path = Credit;
+			sourceTree = "<group>";
+		};
+		3A693A6A221937A200F385C2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3A693A6B221937A200F385C2 /* CreditsViewController.xib */,
+				3A693A6C221937A200F385C2 /* CreditCell.xib */,
+				3A693A6D221937A200F385C2 /* CreditCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3A693A6E221937A200F385C2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3A693A6F221937A200F385C2 /* TableCredit.swift */,
+				3A693A70221937A200F385C2 /* CreditsCoordinator.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		3A693A71221937A200F385C2 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				3A693A72221937A200F385C2 /* CreditsViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		3A693A79221937A700F385C2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3A693A7A221937A700F385C2 /* DepositsViewController.xib */,
+				3A693A7B221937A700F385C2 /* DepositCell.xib */,
+				3A693A7C221937A700F385C2 /* DepositCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3A693A7D221937A700F385C2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3A693A7E221937A700F385C2 /* TableDeposit.swift */,
+				3A693A7F221937A700F385C2 /* DepositsCoordinator.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		3A693A80221937A700F385C2 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				3A693A81221937A700F385C2 /* DepositsViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		3A693A8822194A2F00F385C2 /* AddDeposit */ = {
+			isa = PBXGroup;
+			children = (
+				3A693A8B22194CB200F385C2 /* ViewControllers */,
+				3A693A8922194CB200F385C2 /* Views */,
+			);
+			path = AddDeposit;
+			sourceTree = "<group>";
+		};
+		3A693A8922194CB200F385C2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3A693A8A22194CB200F385C2 /* AddDepositViewController.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3A693A8B22194CB200F385C2 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				3A693A8C22194CB200F385C2 /* AddDepositViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		3A693A8F22195E1300F385C2 /* Buffi */ = {
+			isa = PBXGroup;
+			children = (
+				3A693A9022195E2200F385C2 /* BuffiParser.swift */,
+			);
+			path = Buffi;
+			sourceTree = "<group>";
+		};
+		3A693A932219614800F385C2 /* DeeplinkPay */ = {
+			isa = PBXGroup;
+			children = (
+				3A693A942219616F00F385C2 /* ViewControllers */,
+				3A693A972219616F00F385C2 /* Views */,
+			);
+			path = DeeplinkPay;
+			sourceTree = "<group>";
+		};
+		3A693A942219616F00F385C2 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				3A693A952219616F00F385C2 /* PayForCheque.swift */,
+				3A693A962219616F00F385C2 /* DeeplinkPayViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		3A693A972219616F00F385C2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3A693A982219616F00F385C2 /* DeeplinkPayVIewController.xib */,
+				3A693A992219616F00F385C2 /* PayForCheque.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		3A8096C92211794600DAB8DC /* NetworksList */ = {
 			isa = PBXGroup;
 			children = (
@@ -822,6 +1029,11 @@
 			isa = PBXGroup;
 			children = (
 				E2F686A421F9DE5A00BD3D14 /* NeedToBe */,
+				3A693A932219614800F385C2 /* DeeplinkPay */,
+				3A693A8822194A2F00F385C2 /* AddDeposit */,
+				3A693A692219364C00F385C2 /* Credit */,
+				3A693A682219364100F385C2 /* Deposit */,
+				3A693A4F2219218C00F385C2 /* Shop */,
 				E2C110D021E90D6A0012A978 /* TokensSearch */,
 				E2C1109821E566B60012A978 /* WalletCreation */,
 				3A8096C92211794600DAB8DC /* NetworksList */,
@@ -1424,6 +1636,7 @@
 		E2C1108821E556EE0012A978 /* Parsers */ = {
 			isa = PBXGroup;
 			children = (
+				3A693A8F22195E1300F385C2 /* Buffi */,
 				E2C1108C21E5576C0012A978 /* EIP681 */,
 			);
 			path = Parsers;
@@ -2084,6 +2297,8 @@
 				E2F0EFBB21F8BA2700F11AD1 /* SF-Pro-Text-Regular.otf in Resources */,
 				E2F0EFDA21F8BD1500F11AD1 /* librefranklin-bolditalic.ttf in Resources */,
 				91E7255C214FEDE3003FAD76 /* AddressTableViewCell.xib in Resources */,
+				3A693A82221937A700F385C2 /* DepositsViewController.xib in Resources */,
+				3A693A632219238D00F385C2 /* ShopCell.xib in Resources */,
 				9197F322214403A400C358AA /* SettingsViewController.xib in Resources */,
 				E2F0EFD221F8BD1500F11AD1 /* librefranklin-semibolditalic.ttf in Resources */,
 				E2C14A97220489BC00B060AD /* BackupViewController.xib in Resources */,
@@ -2100,6 +2315,7 @@
 				E2F0EFB821F8BA2700F11AD1 /* SF-Pro-Display-Bold.otf in Resources */,
 				E2215AC121FF44A700FC79AB /* AcceptChequeController.xib in Resources */,
 				E20F3DFC220AFD1000669C8B /* ContactTableCell.xib in Resources */,
+				3A693A5D2219238D00F385C2 /* ShopViewController.xib in Resources */,
 				E2E20215220309340046C956 /* OnboardingViewController.xib in Resources */,
 				9197F2EE2143B92B00C358AA /* WalletViewController.xib in Resources */,
 				B2091507214A5AD000C8B408 /* WalletCell.xib in Resources */,
@@ -2145,14 +2361,20 @@
 				E2F0EFCE21F8BD1500F11AD1 /* librefranklin-thin.ttf in Resources */,
 				E2F0EFD421F8BD1500F11AD1 /* librefranklin-extralight.ttf in Resources */,
 				E2F0EFAC21F8BA2700F11AD1 /* SF-Pro-Display-Black.otf in Resources */,
+				3A693A74221937A200F385C2 /* CreditCell.xib in Resources */,
+				3A693A9D2219616F00F385C2 /* PayForCheque.xib in Resources */,
 				E2F0EFD521F8BD1500F11AD1 /* librefranklin-light.ttf in Resources */,
+				3A693A8D22194CB200F385C2 /* AddDepositViewController.xib in Resources */,
+				3A693A83221937A700F385C2 /* DepositCell.xib in Resources */,
 				3A5D7AA9221622FC0032B20C /* FundsCell.xib in Resources */,
 				3A8096D12212E9FC00DAB8DC /* TokenCell.xib in Resources */,
 				B209150F214A659500C8B408 /* PrivateKeyViewController.xib in Resources */,
 				E2F0EF9E21F8BA2700F11AD1 /* SF-Pro-Text-RegularItalic.otf in Resources */,
 				E2F0EFD621F8BD1500F11AD1 /* librefranklin-extralightitalic.ttf in Resources */,
 				E2F0EFE821F8CAF000F11AD1 /* loading.gif in Resources */,
+				3A693A73221937A200F385C2 /* CreditsViewController.xib in Resources */,
 				E2F0EFB121F8BA2700F11AD1 /* SF-Pro-Text-SemiboldItalic.otf in Resources */,
+				3A693A9C2219616F00F385C2 /* DeeplinkPayVIewController.xib in Resources */,
 				E2C110BE21E755330012A978 /* WalletImportingViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2302,6 +2524,7 @@
 				E2C1108721E507340012A978 /* CurrentNetwork.swift in Sources */,
 				E2A8DAF821F1F6A00031AC58 /* Contact.swift in Sources */,
 				E2C1105A21E507260012A978 /* BiometricsService.swift in Sources */,
+				3A693A86221937A700F385C2 /* DepositsCoordinator.swift in Sources */,
 				E2A8DAFD21F1F6A00031AC58 /* Wallet.swift in Sources */,
 				3A8096D92213111100DAB8DC /* IgnisService.swift in Sources */,
 				E2A8DAFE21F1F6A00031AC58 /* ContainerCD.swift in Sources */,
@@ -2311,10 +2534,12 @@
 				3A8096D722130FE500DAB8DC /* IgnisTransaction.swift in Sources */,
 				E2A8DAFB21F1F6A00031AC58 /* ETHTransaction.swift in Sources */,
 				E27BF78521D1447A00951061 /* PlasmaWeb3ServiceConvenient.swift in Sources */,
+				3A693A85221937A700F385C2 /* TableDeposit.swift in Sources */,
 				E27BF78421D1447A00951061 /* PlasmaContractMethods.swift in Sources */,
 				E2C1106421E507260012A978 /* URLs.swift in Sources */,
 				E2215AC421FF4B1400FC79AB /* AcceptChequeFormController.swift in Sources */,
 				E2C1106121E507260012A978 /* TokensService.swift in Sources */,
+				3A693A87221937A700F385C2 /* DepositsViewController.swift in Sources */,
 				E27BF78621D1447A00951061 /* PlasmaWeb3Service.swift in Sources */,
 				E27BF77B21D1447A00951061 /* BigIntExtension.swift in Sources */,
 				3A8096DD2213828100DAB8DC /* CurrentNonce.swift in Sources */,
@@ -2327,6 +2552,7 @@
 				3A693A4E2218EBBC00F385C2 /* Buff.swift in Sources */,
 				E2C1108421E507340012A978 /* StringExtension.swift in Sources */,
 				914F228E21499D4500ED58E6 /* PinCodeNumberButton.swift in Sources */,
+				3A693A5F2219238D00F385C2 /* ShopCell.swift in Sources */,
 				E27BF78921D1447A00951061 /* BlockHeader.swift in Sources */,
 				E234C7A921ECCA4400F175AF /* TokenViewController.swift in Sources */,
 				E2D451D721EE331600218872 /* BasicSegmentedControl.swift in Sources */,
@@ -2338,11 +2564,15 @@
 				E27BF77D21D1447A00951061 /* NSRegularExpressionExtension.swift in Sources */,
 				E2C1105F21E507260012A978 /* NetworksService.swift in Sources */,
 				9197F2DD2143B57E00C358AA /* OnboardingViewController.swift in Sources */,
+				3A693A75221937A200F385C2 /* CreditCell.swift in Sources */,
 				91E72556214FE104003FAD76 /* SearchTokenCell.swift in Sources */,
+				3A693A9A2219616F00F385C2 /* PayForCheque.swift in Sources */,
+				3A693A76221937A200F385C2 /* TableCredit.swift in Sources */,
 				E2C1106521E507260012A978 /* Constants.swift in Sources */,
 				E27BF77421D1447A00951061 /* TransactionHelpers.swift in Sources */,
 				E2F0EFEA21F8F1C000F11AD1 /* ColorExtension.swift in Sources */,
 				E27BF77221D1447A00951061 /* PlasmaTransaction.swift in Sources */,
+				3A693A9122195E2200F385C2 /* BuffiParser.swift in Sources */,
 				E2B45A602176379100F38E50 /* AddContactController.swift in Sources */,
 				E2C1105C21E507260012A978 /* ContractsService.swift in Sources */,
 				E2A8DBA021F676780031AC58 /* TextViewExtension.swift in Sources */,
@@ -2362,6 +2592,8 @@
 				3A8096D02212E9FC00DAB8DC /* TokenCell.swift in Sources */,
 				E2D451C621EE292700218872 /* BasicViewController.swift in Sources */,
 				E2F0EFEE21F9519500F11AD1 /* PublicKeyViewController.swift in Sources */,
+				3A693A84221937A700F385C2 /* DepositCell.swift in Sources */,
+				3A693A78221937A200F385C2 /* CreditsViewController.swift in Sources */,
 				E2C1108121E507340012A978 /* FloatExtension.swift in Sources */,
 				E2C59074215258B800FF53D3 /* TableTokens.swift in Sources */,
 				914F22952149A24C00ED58E6 /* PincodeCreationStatus.swift in Sources */,
@@ -2396,6 +2628,7 @@
 				E2C1106321E507260012A978 /* ABIs.swift in Sources */,
 				E2215AC021FF44A700FC79AB /* AcceptChequeController.swift in Sources */,
 				E2C1109521E557FE0012A978 /* EIP681Router.swift in Sources */,
+				3A693A8E22194CB200F385C2 /* AddDepositViewController.swift in Sources */,
 				E2C110CC21E8A8B90012A978 /* BasicTextView.swift in Sources */,
 				914F228A21499ACC00ED58E6 /* PincodeViewController.swift in Sources */,
 				E2F0EF7921F7DD8C00F11AD1 /* TokenInfoViewController.swift in Sources */,
@@ -2404,12 +2637,14 @@
 				E2A8DB0321F1FA480031AC58 /* EtherCoordinator.swift in Sources */,
 				E27BF77C21D1447A00951061 /* ArrayExtension.swift in Sources */,
 				E27BF78121D1447A00951061 /* PlasmaErrors.swift in Sources */,
+				3A693A662219238D00F385C2 /* ShopViewController.swift in Sources */,
 				9197F2ED2143B92B00C358AA /* WalletViewController.swift in Sources */,
 				914F229221499F3D00ED58E6 /* CreatePincodeViewController.swift in Sources */,
 				E27BF77321D1447A00951061 /* OutputsManagement.swift in Sources */,
 				E2A8DAFC21F1F6A00031AC58 /* StorageErrors.swift in Sources */,
 				91B6A79721435F5D0033A045 /* AppDelegate.swift in Sources */,
 				E27BF77921D1447A00951061 /* PlasmaCode.swift in Sources */,
+				3A693A77221937A200F385C2 /* CreditsCoordinator.swift in Sources */,
 				3A5D7AA8221622FC0032B20C /* FundsCell.swift in Sources */,
 				E2B45A4B21761F4000F38E50 /* ContactsViewController.swift in Sources */,
 				91B6A7C62143660B0033A045 /* AppController.swift in Sources */,
@@ -2429,6 +2664,7 @@
 				E27BF78B21D1447A00951061 /* BlockHelpers.swift in Sources */,
 				E27BF77121D1447A00951061 /* TransactionInput.swift in Sources */,
 				9197F3252144041400C358AA /* SettingsModels.swift in Sources */,
+				3A693A9B2219616F00F385C2 /* DeeplinkPayViewController.swift in Sources */,
 				9197F321214403A400C358AA /* SettingsViewController.swift in Sources */,
 				E2A8DB9721F616A40031AC58 /* Ether.swift in Sources */,
 				E20F3DFB220AFD1000669C8B /* ContactTableCell.swift in Sources */,
@@ -2651,7 +2887,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = inc.matter.BuffiOS;
+				PRODUCT_BUNDLE_IDENTIFIER = "inc.matter.Franklin-dev";
 				PRODUCT_NAME = BuffiOS;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2679,7 +2915,7 @@
 					"@executable_path/Frameworks",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = inc.matter.BuffiOS;
+				PRODUCT_BUNDLE_IDENTIFIER = inc.matter.Franklin;
 				PRODUCT_NAME = BuffiOS;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
@@ -2762,7 +2998,7 @@
 					"@executable_path/Frameworks",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = inc.matter.BuffiOS;
+				PRODUCT_BUNDLE_IDENTIFIER = "inc.matter.Franklin-beta";
 				PRODUCT_NAME = BuffiOS;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";

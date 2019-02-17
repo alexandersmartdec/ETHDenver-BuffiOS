@@ -52,6 +52,15 @@ public class AppController {
         return nav
     }
     
+    public func deeplinkPayController(cheque: BuffiCode) -> UINavigationController {
+        let vc = DeeplinkPayViewController(cheque: cheque)
+        let nav = navigationController(withTitle: "Pay",
+                                       withImage: nil,
+                                       withController: vc,
+                                       tag: 0)
+        return nav
+    }
+    
     public func enterPincodeController() -> UINavigationController {
         let vc = EnterPincodeViewController(for: EnterPincodeCases.enterWallet, data: Data())
         let nav = navigationController(withTitle: "Enter Pincode",
@@ -88,6 +97,10 @@ public class AppController {
         
         let nav = UINavigationController()
         let tabs = TabBarController()
+        let nav0 = navigationController(withTitle: "Shop",
+                                        withImage: UIImage(named: "shopping-cart"),
+                                        withController: ShopViewController(nibName: nil, bundle: nil),
+                                        tag: 0)
         let nav1 = navigationController(withTitle: "Wallet",
                                         withImage: UIImage(named: "wallet"),
                                         withController: WalletViewController(nibName: nil, bundle: nil),
@@ -116,7 +129,7 @@ public class AppController {
         tabs.tabBar.tintColor = Colors.mainBlue
         tabs.tabBar.unselectedItemTintColor = Colors.otherLightGray
         
-        tabs.viewControllers = [nav1, nav2, nav3]
+        tabs.viewControllers = [nav0, nav1, nav2, nav3]
         
         nav.viewControllers = [tabs]
         nav.setNavigationBarHidden(true, animated: false)
@@ -383,6 +396,7 @@ public class AppController {
         self.userDefaultKeys.setDaiAdded(for: wallet)
     }
     
+    //buffishop:0x4fd693f57e63714591a07a73a4d7ad84e5ccde10?amount=2&uint256=21214124
     private func navigateViaDeepLink(url: URL, in window: UIWindow) {
         if url.absoluteString.hasPrefix("ethereum:") {
             // TODO :- ether deeplink
@@ -398,6 +412,13 @@ public class AppController {
         } else if url.absoluteString.hasPrefix("plasma:") {
             if let parsed = PlasmaParser.parse(url.absoluteString) {
                 let vc = self.acceptChequeController(cheque: parsed)
+                self.createRootViewController(vc, in: window)
+            } else {
+                startAsUsual(in: window)
+            }
+        } else if url.absoluteString.hasPrefix("buffishop:") {
+            if let parsed = BuffiParser.parse(url.absoluteString) {
+                let vc = self.deeplinkPayController(cheque: parsed)
                 self.createRootViewController(vc, in: window)
             } else {
                 startAsUsual(in: window)

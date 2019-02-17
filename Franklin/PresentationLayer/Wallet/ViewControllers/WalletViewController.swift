@@ -394,6 +394,15 @@ class WalletViewController: BasicViewController, ModalViewDelegate {
         self.showSend(token: token)
     }
     
+    func showSend(token: ERC20Token, address: String) {
+        self.modalViewAppeared()
+        let sendMoneyVC = SendMoneyController(token: token, address: address)
+        sendMoneyVC.delegate = self
+        sendMoneyVC.modalPresentationStyle = .overCurrentContext
+        sendMoneyVC.view.layer.speed = Constants.ModalView.animationSpeed
+        self.tabBarController?.present(sendMoneyVC, animated: true, completion: nil)
+    }
+    
     func showSend(token: ERC20Token) {
         self.modalViewAppeared()
         let sendMoneyVC = SendMoneyController(token: token)
@@ -620,6 +629,48 @@ class WalletViewController: BasicViewController, ModalViewDelegate {
         self.present(alert, animated: true, completion: nil)
     }
     
+    func showConvertToBuff(token: ERC20Token) {
+        let alert = UIAlertController(title: "Convert to Buff", message: nil, preferredStyle: UIAlertController.Style.alert)
+        
+        alert.addTextField { (textField) in
+            textField.placeholder = "Enter amount in $"
+            textField.keyboardType = .decimalPad
+        }
+        
+        let enterAction = UIAlertAction(title: "Apply", style: .default) { [unowned self] (_) in
+            guard let wallet = CurrentWallet.currentWallet else {
+                self.showAlert(error: "Cant get wallet")
+                return
+            }
+            guard let amount = alert.textFields![0].text else {
+                self.showAlert(error: "Cant get amount")
+                return
+            }
+            guard Float(amount)! > 0 else {
+                self.showAlert(error: "Can't be zero")
+                return
+            }
+            DispatchQueue.global().async {
+                do {
+                    print(CurrentNetwork.currentNetwork.name)
+                    let password = try wallet.getPassword()
+                    let tx = try wallet.prepareWriteContractTx(web3instance: nil, contractABI: ABIs.buffVending, contractAddress: Addresses.buffVending, contractMethod: "deposit", value: amount, gasLimit: .automatic, gasPrice: .automatic, parameters: [], extraData: Data())
+                    let result = try wallet.sendTx(transaction: tx, password: password)
+                } catch let error {
+                    self.showAlert(error: error.localizedDescription)
+                }
+            }
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
+            
+        }
+        
+        alert.addAction(enterAction)
+        alert.addAction(cancelAction)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     func showDeposit() {
         let alert = UIAlertController(title: "Deposit to Franklin", message: nil, preferredStyle: UIAlertController.Style.alert)
         
@@ -726,6 +777,12 @@ class WalletViewController: BasicViewController, ModalViewDelegate {
             }))
             alert.addAction(UIAlertAction(title: "Convert to xDai", style: .default, handler: { [unowned self] (action) in
                 self.showConvertToXDai(token: token)
+            }))
+        }
+        
+        if token.isBuff() {
+            alert.addAction(UIAlertAction(title: "xDai to Buff", style: .default, handler: { [unowned self] (action) in
+                self.showConvertToBuff(token: token)
             }))
         }
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -914,7 +971,7 @@ extension WalletViewController: QRCodeReaderViewControllerDelegate {
         reader.dismiss(animated: true) { [unowned self] in
             self.modalViewAppeared()
             let token = self.tokensArray[0].token
-            self.showSend(token: token)
+            self.showSend(token: token, address: result.value)
         }
     }
 
