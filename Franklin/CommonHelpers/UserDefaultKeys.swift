@@ -26,6 +26,14 @@ public struct UserDefaultKeys {
         UserDefaults.standard.synchronize()
     }
     
+    public func isBuffAdded(for wallet: Wallet) -> Bool {
+        return UserDefaults.standard.bool(forKey: "BuffAddedForWallet\(wallet.address)")
+    }
+    public func setBuffAdded(for wallet: Wallet) {
+        UserDefaults.standard.set(true, forKey: "BuffAddedForWallet\(wallet.address)")
+        UserDefaults.standard.synchronize()
+    }
+    
     public func isDaiAdded(for wallet: Wallet) -> Bool {
         return UserDefaults.standard.bool(forKey: "DaiAddedForWallet\(wallet.address)")
     }

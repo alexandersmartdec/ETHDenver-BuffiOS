@@ -65,6 +65,7 @@ class AcceptChequeController: BasicViewController, ModalViewDelegate {
                 let franklinAdded = self.userDefaults.isFranklinAdded(for: wallet)
                 let daiAdded = self.userDefaults.isDaiAdded(for: wallet)
                 let xdaiAdded = self.userDefaults.isXDaiAdded(for: wallet)
+                let buffAdded = self.userDefaults.isBuffAdded(for: wallet)
                 if !xdaiAdded {
                     do {
                         try self.appController.addXDai(for: wallet)
@@ -89,6 +90,13 @@ class AcceptChequeController: BasicViewController, ModalViewDelegate {
                 if !daiAdded {
                     do {
                         try self.appController.addDai(for: wallet)
+                    } catch let error {
+                        self.finishSavingWallet(with: error, needDeleteWallet: wallet)
+                    }
+                }
+                if !buffAdded {
+                    do {
+                        try self.appController.addBuff(for: wallet)
                     } catch let error {
                         self.finishSavingWallet(with: error, needDeleteWallet: wallet)
                     }

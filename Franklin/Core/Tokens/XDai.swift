@@ -11,7 +11,7 @@ import Foundation
 public class XDai: ERC20Token {
     public init() {
         super.init(name: "xDai",
-                   address: "",
+                   address: "xDai",
                    decimals: "18",
                    symbol: "$")
     }

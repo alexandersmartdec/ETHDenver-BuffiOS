@@ -174,12 +174,12 @@ class WalletViewController: BasicViewController, ModalViewDelegate {
         DispatchQueue.global().async { [unowned self] in
             let wallet = CurrentWallet.currentWallet!
             var tokens = self.etherCoordinator.getTokens()
-            if let ercTokens = try? wallet.getXDAITokens() {
-                let tableTokens: [TableToken] = ercTokens.map {
-                    TableToken(token: $0, inWallet: wallet, isSelected: false)
-                }
-                tokens.append(contentsOf: tableTokens)
-            }
+//            if let ercTokens = try? wallet.getXDAITokens() {
+//                let tableTokens: [TableToken] = ercTokens.map {
+//                    TableToken(token: $0, inWallet: wallet, isSelected: false)
+//                }
+//                tokens.append(contentsOf: tableTokens)
+//            }
             self.tokensArray = tokens
             self.reloadDataInTable(completion: { [unowned self] in
                 self.updateTokensBalances(tokens: tokens) { [unowned self] uTokens in
@@ -255,6 +255,14 @@ class WalletViewController: BasicViewController, ModalViewDelegate {
         DispatchQueue.global().async { [unowned self] in
 //            var index = 0
             var newTokens = [TableToken]()
+            var xdaiTokens: [ERC20Token] = []
+            if CurrentNetwork().isXDai() {
+                if let wallet = tokens.first?.inWallet {
+                    if let ts = try? wallet.getXDAITokens() {
+                        xdaiTokens = ts
+                    }
+                }
+            }
             for tabToken in tokens {
                 var currentTableToken = tabToken
                 let currentToken = tabToken.token
@@ -264,6 +272,18 @@ class WalletViewController: BasicViewController, ModalViewDelegate {
                     balance = (try? currentWallet.getXDAIBalance()) ?? "0.0"
                 } else if !CurrentNetwork().isXDai() || (currentToken.isEther() || currentToken.isDai()) {
                     balance = self.etherCoordinator.getBalance(for: currentToken, wallet: currentWallet)
+                } else if CurrentNetwork().isXDai() {
+                    balance = "0.0"
+                    for t in xdaiTokens where t == currentToken {
+                        if let b = t.balance {
+                            if let bn = BigUInt(b) {
+                                var fl = Double(bn)/1000000000000000000
+                                fl = Double(round(1000*fl)/1000)
+                                let str = String(fl)
+                                balance = str
+                            }
+                        }
+                    }
                 } else {
                     continue
                 }

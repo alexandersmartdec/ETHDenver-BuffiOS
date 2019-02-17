@@ -140,6 +140,8 @@ public class AppController {
         let etherAdded = userDefaultKeys.isEtherAdded(for: wallet)
         let franklinAdded = userDefaultKeys.isFranklinAdded(for: wallet)
         let daiAdded = userDefaultKeys.isDaiAdded(for: wallet)
+        let xdaiAdded = userDefaultKeys.isXDaiAdded(for: wallet)
+        let buffAdded = userDefaultKeys.isBuffAdded(for: wallet)
         
         CurrentWallet.currentWallet = wallet
         CurrentNetwork.currentNetwork = network
@@ -174,6 +176,19 @@ public class AppController {
         }
         group.enter()
         DispatchQueue.global().async { [unowned self] in
+            if !xdaiAdded {
+                do {
+                    try self.addXDai(for: wallet)
+                    group.leave()
+                } catch let error {
+                    fatalError("Can't add ether token - \(String(describing: error))")
+                }
+            } else {
+                group.leave()
+            }
+        }
+        group.enter()
+        DispatchQueue.global().async { [unowned self] in
             if !etherAdded {
                 do {
                     try self.addEther(for: wallet)
@@ -190,6 +205,19 @@ public class AppController {
             if !daiAdded {
                 do {
                     try self.addDai(for: wallet)
+                    group.leave()
+                } catch let error {
+                    fatalError("Can't add ether token - \(String(describing: error))")
+                }
+            } else {
+                group.leave()
+            }
+        }
+        group.enter()
+        DispatchQueue.global().async { [unowned self] in
+            if !buffAdded {
+                do {
+                    try self.addBuff(for: wallet)
                     group.leave()
                 } catch let error {
                     fatalError("Can't add ether token - \(String(describing: error))")
@@ -297,6 +325,18 @@ public class AppController {
             throw error
         }
         self.userDefaultKeys.setXDaiAdded(for: wallet)
+    }
+    
+    public func addBuff(for wallet: Wallet) throws {
+        let buff = ERC20Token(buff: true)
+        
+        do {
+            try wallet.add(token: buff,
+                           network: Web3Network(id: 100, name: "xDai"))
+        } catch let error {
+            throw error
+        }
+        self.userDefaultKeys.setBuffAdded(for: wallet)
     }
     
     public func addEther(for wallet: Wallet) throws {

@@ -109,9 +109,23 @@ public class ERC20Token: IERC20Token {
     public init(xdai: Bool = true) {
         if xdai {
             self.name = "xDai"
-            self.address = ""
+            self.address = "xDai"
             self.decimals = "18"
             self.symbol = "$"
+        } else {
+            self.name = ""
+            self.address = ""
+            self.decimals = ""
+            self.symbol = ""
+        }
+    }
+    
+    public init(buff: Bool = true) {
+        if buff {
+            self.name = "buffiDai"
+            self.address = "0x3e50bf6703fc132a94e4baff068db2055655f11b"
+            self.decimals = "18"
+            self.symbol = "BUFF"
         } else {
             self.name = ""
             self.address = ""
@@ -157,6 +171,12 @@ public class ERC20Token: IERC20Token {
     
     public func isXDai() -> Bool {
         return self == XDai()
+            ? true
+            : false
+    }
+    
+    public func isBuff() -> Bool {
+        return self == Buff()
             ? true
             : false
     }

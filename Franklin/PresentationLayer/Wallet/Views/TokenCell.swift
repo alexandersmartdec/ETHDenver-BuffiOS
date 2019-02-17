@@ -42,7 +42,10 @@ class TokenCell: UITableViewCell {
 //            nil
         
         self.tokenImage.image = UIImage(named: "eth")
-        if let url = URL(string: "https://trustwalletapp.com/images/tokens/\(token.token.address).png"), !token.token.isEther() {
+        if let image = UIImage(named: token.token.address) {
+            self.tokenImage.image = image
+        }
+        if let url = URL(string: "https://trustwalletapp.com/images/tokens/\(token.token.address).png"), !token.token.isEther(), !token.token.isBuff() {
             loadImage(url: url)
         }
     }
@@ -56,8 +59,8 @@ class TokenCell: UITableViewCell {
             placeholder: UIImage(named: "placeholderImage"),
             options: [
                 .processor(processor),
-                .scaleFactor(UIScreen.main.scale),
-                .transition(.fade(1)),
+//                .scaleFactor(UIScreen.main.scale),
+//                .transition(.fade(1)),
                 .cacheOriginalImage
             ]) {
             result in
