@@ -23,10 +23,11 @@ public class CurrentNetwork {
                     _currentNetwork = selectedNetwork
                     return selectedNetwork
                 }
-                let mainnet = Web3Network(network: Networks.Mainnet)
-                mainnet.select()
-                _currentNetwork = mainnet
-                return mainnet
+                let xdai = Web3Network(id: 100, name: "xDai")
+                //let mainnet = Web3Network(network: Networks.Mainnet)
+                xdai.select()
+                _currentNetwork = xdai
+                return xdai
             }
         }
 

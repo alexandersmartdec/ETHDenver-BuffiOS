@@ -244,8 +244,9 @@ public class AppController {
         if let sn = try? self.networksService.getSelectedNetwork() {
             selectedNetwork = sn
         } else {
-            let mainnet = Web3Network(network: .Mainnet)
-            selectedNetwork = mainnet
+            //let mainnet = Web3Network(network: .Mainnet)
+            let xdai = Web3Network(id: 100, name: "xDai")
+            selectedNetwork = xdai
         }
         
         if let selectedWallet = CurrentWallet.currentWallet {
