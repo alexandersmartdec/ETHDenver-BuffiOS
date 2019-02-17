@@ -47,13 +47,13 @@ class OnboardingViewController: BasicViewController {
         animationImageView.setGifImage(UIImage(gifName: "loading.gif"))
         animationImageView.loopCount = -1
         
-        prodName.text = "FRANKLIN"
+        prodName.text = Constants.prodName
         prodName.textAlignment = .center
         prodName.textColor = Colors.textDarkGray
         prodName.font = UIFont(name: Constants.Fonts.franklinSemibold, size: 55) ?? UIFont.boldSystemFont(ofSize: 55)
         
         subtitle.textAlignment = .center
-        subtitle.text = "SECURE DOLLAR WALLET"
+        subtitle.text = Constants.slogan
         subtitle.textColor = Colors.textDarkGray
         subtitle.font = UIFont(name: Constants.Fonts.franklinMedium, size: 22) ?? UIFont.systemFont(ofSize: 22)
         

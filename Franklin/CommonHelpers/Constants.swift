@@ -10,6 +10,9 @@ import UIKit
 
 public struct Constants {
     
+    static let prodName = "xDai"
+    static let slogan = "SECURE & FAST WALLET"
+    
     static let commonWidthCoeff: CGFloat = 0.8
     
     public struct Main {

@@ -42,25 +42,25 @@
                     <rect key="frame" x="19" y="59.5" width="337.5" height="547"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rjK-Uh-51Z">
-                            <rect key="frame" x="0.0" y="415" width="337.5" height="124"/>
+                            <rect key="frame" x="0.0" y="427" width="337.5" height="112"/>
                         </imageView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Wmb-Ri-0qL">
-                            <rect key="frame" x="50.5" y="0.0" width="236" height="415"/>
+                            <rect key="frame" x="50.5" y="0.0" width="236" height="427"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FRANKLIN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="fiA-mZ-y0a">
-                                    <rect key="frame" x="0.0" y="0.0" width="236" height="55.5"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Franklin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="fiA-mZ-y0a">
+                                    <rect key="frame" x="13" y="0.0" width="210" height="44"/>
                                     <fontDescription key="fontDescription" name="LibreFranklin-SemiBold" family="Libre Franklin" pointSize="55"/>
                                     <color key="textColor" red="0.4431372549" green="0.4431372549" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SECURE DOLLAR WALLET" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="C5i-Vv-kGO">
-                                    <rect key="frame" x="0.0" y="55.5" width="236" height="22.5"/>
+                                    <rect key="frame" x="0.0" y="44" width="236" height="22"/>
                                     <fontDescription key="fontDescription" name="LibreFranklin-Medium" family="Libre Franklin" pointSize="22"/>
                                     <color key="textColor" red="0.4431372549" green="0.4431372549" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="franklin" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gxB-hy-7A9">
-                                    <rect key="frame" x="0.0" y="78" width="236" height="337"/>
+                                    <rect key="frame" x="0.0" y="66" width="236" height="361"/>
                                 </imageView>
                             </subviews>
                             <viewLayoutGuide key="safeArea" id="7V4-xO-mCf"/>
@@ -100,6 +100,7 @@
                         <constraint firstItem="JDS-uz-3qj" firstAttribute="top" relation="greaterThanOrEqual" secondItem="gxB-hy-7A9" secondAttribute="bottom" id="F4S-lQ-lEX"/>
                         <constraint firstAttribute="bottom" secondItem="Qih-5a-ZOa" secondAttribute="bottom" constant="10" id="HDf-kB-OrV"/>
                         <constraint firstItem="Wmb-Ri-0qL" firstAttribute="top" secondItem="x0q-Sz-xBY" secondAttribute="top" id="I9K-mw-noq"/>
+                        <constraint firstItem="C5i-Vv-kGO" firstAttribute="height" secondItem="x0q-Sz-xBY" secondAttribute="height" multiplier="0.04" id="Tnk-df-L8p"/>
                         <constraint firstItem="Qih-5a-ZOa" firstAttribute="width" secondItem="JDS-uz-3qj" secondAttribute="width" id="VDo-ep-d23"/>
                         <constraint firstItem="Qih-5a-ZOa" firstAttribute="height" secondItem="JDS-uz-3qj" secondAttribute="height" id="WD1-Pg-9zr"/>
                         <constraint firstItem="rjK-Uh-51Z" firstAttribute="bottom" secondItem="Cmt-Ew-osr" secondAttribute="bottom" id="We7-Aa-Eaa"/>
@@ -108,6 +109,7 @@
                         <constraint firstItem="JDS-uz-3qj" firstAttribute="centerX" secondItem="x0q-Sz-xBY" secondAttribute="centerX" id="kbZ-qK-WHP"/>
                         <constraint firstAttribute="bottomMargin" secondItem="rjK-Uh-51Z" secondAttribute="bottom" id="ncs-Lt-rNt"/>
                         <constraint firstItem="Qih-5a-ZOa" firstAttribute="top" secondItem="JDS-uz-3qj" secondAttribute="bottom" constant="10" id="neM-l6-u8X"/>
+                        <constraint firstItem="fiA-mZ-y0a" firstAttribute="height" secondItem="x0q-Sz-xBY" secondAttribute="height" multiplier="0.08" id="pp8-Kv-AuE"/>
                         <constraint firstItem="Wmb-Ri-0qL" firstAttribute="width" secondItem="x0q-Sz-xBY" secondAttribute="width" multiplier="0.7" id="qCD-Zw-1eY"/>
                         <constraint firstItem="rjK-Uh-51Z" firstAttribute="width" secondItem="x0q-Sz-xBY" secondAttribute="width" id="tLw-nf-352"/>
                         <constraint firstItem="Cmt-Ew-osr" firstAttribute="leading" secondItem="rjK-Uh-51Z" secondAttribute="leading" id="u56-44-WPl"/>
@@ -133,6 +135,6 @@
     </objects>
     <resources>
         <image name="close_blue" width="115" height="111"/>
-        <image name="franklin" width="272" height="408"/>
+        <image name="franklin" width="848" height="1135"/>
     </resources>
 </document>

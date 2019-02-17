@@ -46,25 +46,25 @@
                     <rect key="frame" x="19" y="59.5" width="337.5" height="547"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="T7T-dq-jmR">
-                            <rect key="frame" x="0.0" y="415" width="337.5" height="124"/>
+                            <rect key="frame" x="0.0" y="427" width="337.5" height="112"/>
                         </imageView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="k9L-rX-Kju">
-                            <rect key="frame" x="50.5" y="0.0" width="236" height="415"/>
+                            <rect key="frame" x="50.5" y="0.0" width="236" height="427"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FRANKLIN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="hRf-R9-Slc">
-                                    <rect key="frame" x="0.0" y="0.0" width="236" height="55.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="236" height="44"/>
                                     <fontDescription key="fontDescription" name="LibreFranklin-SemiBold" family="Libre Franklin" pointSize="55"/>
                                     <color key="textColor" red="0.4431372549" green="0.4431372549" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SECURE DOLLAR WALLET" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="z8E-X5-bRF">
-                                    <rect key="frame" x="0.0" y="55.5" width="236" height="22.5"/>
+                                    <rect key="frame" x="0.0" y="44" width="236" height="22"/>
                                     <fontDescription key="fontDescription" name="LibreFranklin-Medium" family="Libre Franklin" pointSize="22"/>
                                     <color key="textColor" red="0.4431372549" green="0.4431372549" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="franklin" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="66Y-EM-95G">
-                                    <rect key="frame" x="0.0" y="78" width="236" height="337"/>
+                                    <rect key="frame" x="0.0" y="66" width="236" height="361"/>
                                 </imageView>
                             </subviews>
                             <viewLayoutGuide key="safeArea" id="xni-O0-GEr"/>
@@ -74,13 +74,13 @@
                             <state key="normal" title="Button"/>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By cliking 'Continue' you agree to the" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="a1r-5y-Fyt">
-                            <rect key="frame" x="46" y="503.5" width="245" height="22"/>
+                            <rect key="frame" x="34.5" y="503.5" width="268" height="22"/>
                             <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="terms and conditions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="5jd-DQ-sd1">
-                            <rect key="frame" x="46" y="525.5" width="245" height="21.5"/>
+                            <rect key="frame" x="34.5" y="525.5" width="268" height="21.5"/>
                             <fontDescription key="fontDescription" name="SFProDisplay-Regular" family="SF Pro Display" pointSize="16"/>
                             <color key="textColor" red="0.52156862749999999" green="0.73333333329999995" blue="0.39607843139999999" alpha="0.84705882349999995" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -98,6 +98,7 @@
                         <constraint firstAttribute="bottom" secondItem="5jd-DQ-sd1" secondAttribute="bottom" id="2iM-Vk-qAI"/>
                         <constraint firstItem="F6C-uN-FK3" firstAttribute="leading" secondItem="T7T-dq-jmR" secondAttribute="leading" id="8q5-8E-1bP"/>
                         <constraint firstItem="a1r-5y-Fyt" firstAttribute="centerX" secondItem="uva-wy-8uq" secondAttribute="centerX" id="AZW-Tf-sRj"/>
+                        <constraint firstItem="z8E-X5-bRF" firstAttribute="height" secondItem="uva-wy-8uq" secondAttribute="height" multiplier="0.04" id="BOk-LQ-rSw"/>
                         <constraint firstItem="T7T-dq-jmR" firstAttribute="top" secondItem="66Y-EM-95G" secondAttribute="bottom" id="Dxs-2p-Z7h"/>
                         <constraint firstItem="5jd-DQ-sd1" firstAttribute="centerX" secondItem="uva-wy-8uq" secondAttribute="centerXWithinMargins" id="JB2-ze-QT5"/>
                         <constraint firstAttribute="bottomMargin" secondItem="T7T-dq-jmR" secondAttribute="bottom" id="JPK-Gu-ntG"/>
@@ -107,6 +108,7 @@
                         <constraint firstItem="5jd-DQ-sd1" firstAttribute="width" secondItem="a1r-5y-Fyt" secondAttribute="width" id="PSb-fd-pXU"/>
                         <constraint firstItem="KFu-TQ-CFK" firstAttribute="top" relation="greaterThanOrEqual" secondItem="66Y-EM-95G" secondAttribute="bottom" id="Rsd-c0-cQK"/>
                         <constraint firstItem="k9L-rX-Kju" firstAttribute="top" secondItem="uva-wy-8uq" secondAttribute="top" id="U0C-DT-40M"/>
+                        <constraint firstItem="hRf-R9-Slc" firstAttribute="height" secondItem="uva-wy-8uq" secondAttribute="height" multiplier="0.08" id="Ujd-c0-tTr"/>
                         <constraint firstItem="66Y-EM-95G" firstAttribute="centerY" secondItem="uva-wy-8uq" secondAttribute="centerY" multiplier="0.9" id="awS-YZ-rB0"/>
                         <constraint firstItem="a1r-5y-Fyt" firstAttribute="top" secondItem="KFu-TQ-CFK" secondAttribute="bottom" constant="5" id="bX9-dl-VxR"/>
                         <constraint firstItem="T7T-dq-jmR" firstAttribute="centerX" secondItem="uva-wy-8uq" secondAttribute="centerX" id="fkk-gN-wt4"/>
@@ -133,6 +135,6 @@
         </view>
     </objects>
     <resources>
-        <image name="franklin" width="272" height="408"/>
+        <image name="franklin" width="848" height="1135"/>
     </resources>
 </document>

@@ -23,7 +23,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SettingsViewController" customModule="Franklin" customModuleProvider="target">
             <connections>
+                <outlet property="prodName" destination="MeD-y6-1yz" id="OXi-v8-fZx"/>
                 <outlet property="settingsTableView" destination="qLk-cD-A2R" id="KMu-w0-61A"/>
+                <outlet property="slogan" destination="Da1-rY-WAF" id="gM6-b5-N2v"/>
                 <outlet property="version" destination="Rhw-1x-i08" id="ts0-TM-boB"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -37,13 +39,13 @@
                     <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="D7V-4L-tBD">
-                            <rect key="frame" x="71" y="0.0" width="272" height="255.33333333333334"/>
+                            <rect key="frame" x="-217" y="0.0" width="848" height="255.33333333333334"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="franklin" translatesAutoresizingMaskIntoConstraints="NO" id="C50-sz-DUm">
-                                    <rect key="frame" x="0.0" y="0.0" width="272" height="195.33333333333334"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="848" height="195.33333333333334"/>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FRANKLIN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MeD-y6-1yz">
-                                    <rect key="frame" x="46.666666666666686" y="195.33333333333334" width="179" height="40"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FRANKLIN" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MeD-y6-1yz">
+                                    <rect key="frame" x="342" y="195.33333333333334" width="164.33333333333337" height="40"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="uBI-73-bGm"/>
                                     </constraints>
@@ -52,7 +54,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SECURE DOLLAR WALLET" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Da1-rY-WAF">
-                                    <rect key="frame" x="46.333333333333329" y="235.33333333333331" width="179.33333333333337" height="20"/>
+                                    <rect key="frame" x="337.66666666666669" y="235.33333333333331" width="172.66666666666669" height="20"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="20" id="lig-og-35T"/>
                                     </constraints>
@@ -113,6 +115,6 @@
         </view>
     </objects>
     <resources>
-        <image name="franklin" width="272" height="408"/>
+        <image name="franklin" width="848" height="1135"/>
     </resources>
 </document>

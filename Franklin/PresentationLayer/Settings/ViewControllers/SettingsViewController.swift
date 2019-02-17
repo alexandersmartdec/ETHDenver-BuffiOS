@@ -14,6 +14,8 @@ class SettingsViewController: BasicViewController, ModalViewDelegate {
 
     @IBOutlet weak var settingsTableView: BasicTableView!
     @IBOutlet weak var version: UILabel!
+    @IBOutlet weak var prodName: UILabel!
+    @IBOutlet weak var slogan: UILabel!
     
     var mainSettings: [MainSetting] = []
     var walletsService = WalletsService()
@@ -30,6 +32,8 @@ class SettingsViewController: BasicViewController, ModalViewDelegate {
         super.viewWillAppear(animated)
         self.updateTable()
         self.setupVersion()
+        self.prodName.text = Constants.prodName
+        self.slogan.text = Constants.slogan
     }
     
     func setupVersion() {

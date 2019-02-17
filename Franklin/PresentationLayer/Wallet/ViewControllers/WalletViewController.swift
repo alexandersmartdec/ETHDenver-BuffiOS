@@ -269,7 +269,14 @@ class WalletViewController: BasicViewController, ModalViewDelegate {
                 let currentWallet = tabToken.inWallet
                 var balance: String
                 if CurrentNetwork().isXDai() && currentToken.isXDai() {
-                    balance = (try? currentWallet.getXDAIBalance()) ?? "0.0"
+                    balance = "0.0"
+                    if let xdaiBalance = try? currentWallet.getXDAIBalance() {
+                        if let db = Double(xdaiBalance) {
+                            let rnd = Double(round(1000*db)/1000)
+                            let str = String(rnd)
+                            balance = str
+                        }
+                    }
                 } else if !CurrentNetwork().isXDai() || (currentToken.isEther() || currentToken.isDai()) {
                     balance = self.etherCoordinator.getBalance(for: currentToken, wallet: currentWallet)
                 } else if CurrentNetwork().isXDai() {
